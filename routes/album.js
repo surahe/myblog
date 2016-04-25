@@ -26,7 +26,8 @@ exports.create = function(req, res) {
             album_name: album_name_box,
             page_index: page.number,
             album_cover: album_cover_box,
-            album_number: album_number_box
+            album_number: album_number_box,
+            bloggername: user.user_username
         });
     });
 }

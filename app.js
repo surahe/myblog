@@ -90,5 +90,7 @@ app.get('/get_tag', write.getTag)
 
 app.get('/:blogname/bloglist',blogList.show)
 app.post('/createtag',blogList.create)
+app.post('/deletetag',blogList.del)
+app.post('/edittag',blogList.edit)
 
 module.exports = app;

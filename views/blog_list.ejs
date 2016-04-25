@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><%= bloggername%>的博客</title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
@@ -20,7 +20,8 @@
             </nav>
         </div>
         <div class="my_func">
-            <a href="" class="write_link"><em class="wte"></em>写日志</a>
+
+            <a href="../write" class="write_link"><em class="wte"></em>写日志</a>
         </div>
         <div class="row">
             <div class="col-md-2 col-md-offset-1">
@@ -28,10 +29,11 @@
                     <h4>分&nbsp;&nbsp;&nbsp;&nbsp;类</h4>
                     <ul>
                         <li><a href="" data-toggle="modal" data-target="#tag_modal">[编辑分类]</a></li>
+                        <li><a href="">所有博客</a><em>(<%=blog_count %>)</em></li>
+                        <li><a href="">默认分类</a><em>(<%= df_count %>)</em></li>
                         <% for(var i in tags) {%>
-                        <li><a href=""><%= tags[i].tag_name %></a><em>(0)</em></li>
+                        <li><a href=""><%= tags[i].tag_name %></a><em>(<%=tag_count[i] %>)</em></li>
                         <% }%>
-
                     </ul>
                 </div>
             </div>
@@ -77,11 +79,11 @@
                                 <li>
                                     <span class="htit"><%= tags[i].tag_name %></span>
                                     <input type="hidden" value=<%= tags[i].tag_name %> name="typename[]" class="catName" maxlength="14">
-                                    <span class="control"><a href="javascript:;"class="edit_tag">[编辑]</a><a href="javascript:;" class="del_tag"  data-toggle="modal" data-target="#del_modal">[删除]</a></span>
+                                    <span class="control"><a href="#"class="edit_tag">[编辑]</a><a href="#" class="del_tag"  data-toggle="modal" data-target="#del_modal">[删除]</a></span>
                                     <div  class="writeinfo">
                                         <input  type="text" value="" class="form-control">
-                                        <a class="edit_con" href="javascript:;">确定</a>
-                                        <a class="edit_can" href="javascript:;">取消</a>
+                                        <a class="edit_con" href="#">确定</a>
+                                        <a class="edit_can" href="#">取消</a>
                                         <div class="errTips"></div>
                                     </div>
                                 </li>
@@ -101,11 +103,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">提示</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body del_tip">
                     确实要删除此分类吗？删除后不可恢复。
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-primary del_con">确认</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -154,8 +156,9 @@
 
         $(document).on('click','.edit_con',function(){
             var only = false;
-            var tagname = $(this).parent().children('.form-control').val()
-            console.log(tagname)
+            var tagname = $(this).parent().children('.form-control').val();
+            var li = $(this).parent().parent();
+            var old_name = li.children('.catName').attr('value')
             if(! tagname){
                 $('.errTips').show().text('分类名称不能为空')
             } else{
@@ -166,7 +169,9 @@
                     }
                 })
                 if(!only) {
-
+                    $.post('/edittag',{oldname:old_name,newname:tagname},function(result){
+                        window.location.reload()
+                    })
                 }
             }
         })
@@ -174,8 +179,15 @@
 
     <!--删除-->
     <script>
+        var del_tag = "";
         $(document).on('click','.del_tag',function(){
-
+            var li = $(this).parent().parent();
+            del_tag = li.children('.catName').attr('value');
+        })
+        $(document).on('click','.del_con',function(){
+            $.post('/deletetag',{name:del_tag},function(result){
+                window.location.reload()
+            })
         })
     </script>
 

@@ -12,10 +12,9 @@ exports.show = function(req, res) {
             if(tag) {
                 for(var i = 0; i < tag.length; i++) {
                     show_name[i] = tag[i].tag_name,
-                        show_number[i] = tag[i].tag_number
+                    show_number[i] = tag[i].tag_number
                 }
             }
-            console.log(req.session)
             res.render('write',{
                 show_name: show_name,
                 show_number: show_number,
