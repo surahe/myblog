@@ -1,0 +1,951 @@
+/*
+
+    CLIMB THE MOUNTAINS by ERSKINE DESIGN
+    VERSION 1.0
+
+    CONTENTS ----------
+        1.通用
+        2.注册
+        3.设置
+        4.相册
+        5.图片
+        6.关于我
+        7.写日志
+        8.日志列表
+    -------------------
+
+    COLOURS -----------
+
+
+    -------------------
+
+*/
+
+/* 1通用
+---------------------------------------------------------------------- */
+*{
+    font-family: "微软雅黑";
+}
+
+#menu {
+    width: 100%;
+    color: gray;
+    height: 45px;
+    border-bottom: 1px solid #ccc;
+}
+
+#menu .in_menu{
+    float: right;
+    padding-right: 200px;
+    height: 45px;
+    line-height:45px;
+    font-size: 14px;
+}
+
+#menu .in_menu div{
+    float: left;
+    padding-right:20px;
+}
+
+#menu .in_menu .logo img{
+    width: 35px;
+    height: 35px;
+    margin-bottom: 4px;
+}
+
+#nav {
+    margin-bottom: 55px;
+}
+
+#nav .navbar-nav{
+    margin-left: 110px;
+    height:40px;
+    border:1px solid #e5e5e5;
+    border-radius: 20px;
+}
+
+#nav .navbar-nav li:nth-child(1),#nav .navbar-nav li:nth-child(3) {
+    width:180px;
+    height:38px;
+    background: -webkit-linear-gradient(top , rgb(255, 255, 255) , rgb(234, 234, 234) 100%);
+    border-right: 1px solid #e5e5e5;
+}
+
+#nav .navbar-nav li:nth-child(2),#nav .navbar-nav li:nth-child(4) {
+    width:180px;
+    height:38px;
+    background: -webkit-linear-gradient(top , rgb(255, 255, 255) , rgb(240, 240, 240) 100%);
+    border-right: 1px solid #e5e5e5;
+}
+
+#nav .navbar-nav li:last-child {
+    border-right: none;
+}
+
+#nav .navbar-nav li:first-child {
+    border-radius: 20px 0px  0 20px;
+}
+
+#nav .navbar-nav li:last-child {
+    border-radius: 0 20px 20px 0 ;
+}
+
+#nav .navbar-nav li:first-child a:hover {
+    border-radius: 20px 0px  0 20px;
+}
+
+#nav .navbar-nav li:last-child a:hover{
+    border-radius: 0 20px 20px 0 ;
+}
+
+#nav .navbar-nav li a{
+    padding: 0;
+    height:40px;
+    line-height: 40px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+/* 2注册
+---------------------------------------------------------------------- */
+#register {
+    background-color: #eeeeee;
+}
+
+#register .container .form{
+    margin:0px auto;
+    width:500px;
+    background-color: #eeeeee;
+    border-radius: 15px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+#register .container h2 {
+    color: #337AB7;
+    font-weight:700;
+    text-align: center;
+}
+
+#register .container .form .alert{
+    font-size:16px;
+    text-align: center;
+    margin:0 auto;
+    padding-left:0;
+    padding-right:0;
+}
+
+#register .container .form form{
+    margin:0 auto;
+    width:300px;
+    padding-top: 10px;
+
+    border-radius: 15px;
+}
+
+#register .container .form-group input {
+    font-size:16px;
+    height:40px;
+}
+
+#register .container .form-group #captcha {
+    display: inline-block;
+    width:150px;
+}
+
+/* 3 设置
+---------------------------------------------------------------------- */
+
+#set .container .row .tab-content{
+    margin-top: 20px;
+    padding-left:120px;
+
+}
+
+#set .container .row  .save {
+    margin-left: 150px;
+}
+
+#set .container .row  #personal-data #birthday span select{
+    margin-right: 10px;
+    display: inline;
+    width: auto;
+}
+
+#set .container .row  #personal-data #city {
+    display: inline;
+}
+
+#set .container .row #personal-data #city select {
+    margin-right: 5px;
+}
+
+#set .container .row  #personal-data #city .prov {
+    width: 100px;
+    display: inline;
+}
+
+#set .container .row #personal-data #city .city {
+    width: 100px;
+    display: inline;
+}
+
+#set .container .row .tab-pane  .form-group {
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #b3b7b3;
+}
+
+#logo .container {
+    margin-top: 20px;
+}
+
+#logo #preview {
+    width: 322px;
+    height: 322px;
+    border: solid 1px #ccc;
+    background-color: #f0f0ee;
+    display: inline-block;
+    float: left;
+}
+
+#logo #preview-pane {
+    position: absolute;
+    top: 65px;
+    right: 140px;
+    float: left;
+}
+
+#logo .jcrop-holder #preview-pane {
+    position: relative;
+    top: -10px;
+    left: 444px;
+    z-index: 2000;
+}
+
+#logo #preview-pane .preview-container {
+    width: 180px;
+    height: 180px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+
+}
+
+#logo #preview-pane .preview-container_s {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+#logo .desc {   color: #999;}
+
+#logo #preview_large {
+    width:180px;
+    height:180px;
+}
+
+#logo #preview_small {
+    width:50px;
+    height:50px;
+}
+
+#logo .choose_pic {
+    margin-top: 10px;
+}
+
+#logo .save_pic {
+    margin-top: 10px;
+}
+
+#logo .save_pic button {
+    width: 80px;
+}
+
+/* 4 相册
+---------------------------------------------------------------------- */
+#album {
+    background-color: #f5f5f5;
+}
+
+#album .album_operation .create_album {
+    width: 94px;
+    height: 31px;
+    overflow: hidden;
+    display: inline-block;
+    background: url("../images/system/create_album.jpg") no-repeat ;
+}
+
+#album .album_operation .create_album:hover {
+    background: url("../images/system/create_album.jpg") no-repeat 0 -31px;
+}
+
+#album  form {
+    text-align: center;
+}
+
+#album form label {
+    color: #888;;
+}
+
+#album_name, #new_name, #photo_name {
+    display: inline-block;
+    width: auto;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+#album .alubm_list ul {
+    padding:0;
+}
+
+#album .alubm_list .content-album {
+    width: 200px;
+    height: 286px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    list-style: none;
+    float: left;
+    background: #fff;
+    border: 1px solid #b5b5b5;
+    border-bottom: 1px solid #6b6b6b;
+    box-shadow: 0 1px 1px #e5e5e5;
+    position: relative;
+    overflow: hidden;
+}
+
+#album .alubm_list .content-album .content-album-cover {
+    width: 200px;
+    height: 200px;
+}
+
+.content-album-cover a:hover {
+    text-decoration: none;
+}
+
+.content-album-del {
+    height: 23px;
+    position: absolute;
+    top: -30px;
+    right: 5px;
+    transition: top 300ms;
+    padding: 0 5px;
+    background-color: #000;
+    border-radius: 3px;
+}
+
+.content-album-del a {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    transition: all .2s ease-out;
+    background: url(../images/system/album-del-modify.png) -3px 0 ;
+}
+
+.content-album-del a:hover {
+    background-image: url(../images/system/album-del-modify-hover.png);
+}
+
+.content-album-del .delete {
+    background-position: -30px 0;
+}
+
+.content-album-info {
+    padding-top: 12px;
+    padding-left: 10px;
+}
+
+.content-album-name {
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 180px;
+    display: block;
+}
+
+.content-album-date {
+    display: block;
+    color: #909090;
+    font-size: 14px;
+}
+
+.content-album-cover {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.content-album-cover .album_cover {
+    margin: 0 auto;
+    background-repeat: no-repeat;
+}
+
+.content-album-cover .empty-album {
+    width: 200px;
+    height: 200px;
+    background: #f3f3f3 url(../images/system/empty_album.png) no-repeat 50% 50%;
+}
+
+.content-album-cover .empty-album span {
+    position: relative;
+    top: 56%;
+    color: #bebebe;
+}
+
+.content-album-picture-total {
+    background: url(../images/system/album-total-bg.png);
+    width: 70px;
+    height: 26px;
+    font-size: 12px;
+    margin-top: -50px;
+    margin-left: 128px;
+    position: relative;
+    margin-bottom: 13px;
+    z-index: 10;
+    text-align: right;
+    color: #fff;
+    padding-top: 2px;
+    text-align: center;
+}
+
+.content-album-picture-total span {
+    font-size: 18px;
+    color: #fff;
+    padding-right: 3px;
+}
+
+.content-album-del.ico-show {
+    top: 5px;
+}
+
+#pager {
+    width: 205px;
+    height:36px;
+    margin: 30px auto;
+    position: relative;
+}
+
+#prev {
+    position: absolute;
+    right:115px;
+}
+
+#next {
+    position: absolute;
+    left: 103px;
+}
+
+#pager a {
+    display: inline-block;
+    line-height: 34px;
+    margin-right: 9px;
+    background: white;
+    padding: 0 18px;
+    border: 1px solid #b5b5b5;
+    text-decoration: none;
+}
+
+/* 5 图片
+---------------------------------------------------------------------- */
+.create_photo {
+    width: 94px;
+    height: 31px;
+    line-height: 31px;
+    display: inline-block;
+    text-align: center;
+    border-bottom: 1px solid #dcdcdc;
+    border-radius: 10px;
+    color: #66663c;
+}
+
+.create_photo:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #00b8ee;
+}
+
+.photo_list {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    min-height: 285px;
+}
+
+.photo_list li {
+    float: left;
+    width: 206px;
+    margin: 9px 12px 15px 12px;
+    display: inline-block;
+    line-height: 1.7em;
+    position: relative;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.photo_list li p{
+    font-size: 12px;
+}
+
+.upload_photo {
+    width: 94px;
+    height: 31px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    line-height: 31px;
+    background-color: #efefef;
+    border-bottom: 1px solid #b5b5b5;
+    color: #646464;
+    border-radius: 10px
+}
+
+.upload_photo:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #00b3ee;
+}
+
+#photo form {
+    text-align: center;
+}
+
+.choose_pic.upload_pic {
+    margin-top:15px;
+    margin-bottom: 10px;
+}
+
+.photo_list li {
+    float: left;
+    width: 200px;
+    display: inline-block;
+}
+
+.photo_border p{
+    width: 201px;
+    height: 201px;
+    display: table-cell;
+    vertical-align:middle;
+    border: 1px solid #ccc;
+    text-align:center;
+}
+
+.photo_titie {
+    white-space: nowrap;
+    width: 200px;
+    overflow: hidden;
+    text-overflow:ellipsis
+}
+
+.photo_titie a {
+    font-size: 16px;
+}
+
+.photo_list li .edit_tile {
+    font-size: 12px;
+}
+
+.edit_input {
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    font-family: Verdana, "宋体", sans-serif;
+    color: #909090;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.photo_input {
+    width: 200px;
+    height: 17px;
+    line-height: 17px;
+    padding: 10px 0;
+}
+
+.photo_btn {
+    margin-bottom: 0px;
+}
+
+.edit_save, .edit_cancel {
+    display: inline-block;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #efefef;
+}
+
+.edit_save span, .edit_cancel span {
+    font-size: 12px!important;
+    line-height: 23px;
+    padding: 0px 10px 0px 8px;
+    display: inline-block;
+    width: 60px;
+    height: 23px;
+    overflow-x: visible;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* 6关于我
+---------------------------------------------------------------------- */
+.per_data,.per_file {
+    padding:3px;
+    border: 1px solid #d6d6d6;
+}
+
+.data_head,.file_title {
+    height: 30px;
+    line-height: 30px;
+    background-color: #f0f0f0;
+}
+
+.data_head span,.file_title span {
+    padding-left: 10px;
+    font-weight: 700;
+    color: #666666;
+}
+
+.data_body {
+    padding: 10px;
+    text-align: center;
+}
+
+.data_img {
+    margin-bottom: 10px;
+}
+
+.data_img img {
+    border: 1px solid #ccc;
+}
+
+.data_name {
+    text-align: center;
+}
+
+.data_name span {
+    font-size: 14px;
+    white-space: nowrap;
+    color: #7C7C7C;
+    font-weight: bold;
+}
+
+.file_body {
+    margin: 0 20px;
+    padding-bottom: 40px;
+    padding-top: 2px;
+}
+
+.basic_file {
+    padding: 15px 0 14px;
+}
+
+.basic_title {
+    height: 32px;
+    line-height: 32px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.basic_file table tr {
+    line-height: 28px;
+    height: 28px;
+}
+
+.basic_file table tr .tr_title {
+    padding-right: 20px;
+    color: #8f8f8f;
+}
+
+/* 7写日志
+---------------------------------------------------------------------- */
+.article {
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    width: 900px;
+    padding-bottom: 50px;
+}
+
+.article_title {
+    background: -webkit-linear-gradient(top, rgba(230,230,230,1) 0%, rgba(246,246,246,1) 59%, rgba(255,255,255,1) 100%);
+}
+
+.article_title span{
+    color: #49687F;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.title_box {
+    width: 850px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.title_box input {
+    width: 700px;
+    display: inline-block;
+}
+
+.tag_box {
+    padding: 20px 0;
+}
+
+.tag_box select {
+    margin-right: 15px;
+}
+
+.post_blog_box {
+    text-align: center;
+}
+
+#post_blog {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+}
+
+.create_tag {
+    margin: 10px 0;
+}
+
+.create_tag input {
+    width: 200px;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.create_tag button {
+    margin-bottom: 4px;
+}
+
+#tag_modal .modal-dialog {
+    width: 500px;
+}
+
+#tag_modal .modal-body {
+    padding: 11px 30px 0 30px;
+}
+
+
+/* 8日志列表
+---------------------------------------------------------------------- */
+.write_link {
+    position: relative;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #8a8a8a;
+    width: 88px;
+    height: 34px;
+    padding: 0 10px;
+    background: -webkit-linear-gradient(top , rgb(255, 255, 255) , rgb(234, 234, 234) 100%);
+    line-height: 34px;
+    text-align: right;
+}
+
+.write_link:hover {
+    text-decoration: none;
+    background: -webkit-linear-gradient(top , rgb(239, 255, 252), rgb(234, 232, 214) 100%);
+}
+
+.wte{
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    left: 12px;
+    width:15px;
+    height: 20px;
+    background: url("../images/system/write.png") no-repeat;
+}
+
+.tag_list {
+    border: 1px solid #ccc;
+}
+
+.tag_list h4 {
+    margin-top: 0;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    background-color: #dbdbdb;
+}
+
+.tag_list ul {
+    padding-left: 10px;
+}
+
+.tag_list ul li {
+    list-style: none;
+    padding-top: 1px;
+    height: 24px;
+    font-size:14px;
+}
+
+.tag_list ul em{
+    font-style: normal;
+}
+
+.my_func {
+    position: absolute;
+    left: 700px;
+    width: 200px;
+    top: 140px;
+    left: 800px;
+}
+
+.blog_list {
+    border: 1px solid #ccc;
+}
+
+.blog_list_head {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    padding-left: 10px;
+    background-color: #dbdbdb;
+}
+
+.blog_list_head em {
+    font-style: normal;
+}
+
+.blog_list_blk {
+    padding: 12px 21px 40px;
+}
+
+.blog_box {
+    border-top: 1px dotted #d3d3d3;
+    padding-bottom: 20px;
+}
+
+.blog_cell {
+    height: 40px;
+    padding-top: 8px;
+    border-bottom: 1px dotted #d3d3d3;
+    line-height: 25px;
+}
+
+.blog_title {
+    width: 410px;
+    white-space: nowrap;
+    overflow: hidden;
+    float: left;
+    padding-left: 11px;
+    margin: 0;
+}
+
+.blog_info {
+    float: right;
+}
+
+.blog_info .blog_time {
+    color: #7C7C7C;
+    float: left;
+    text-align: right;
+    margin-right: 4px;
+    padding-top: 1px;
+}
+
+.blog_nodata {
+    font-size: 14px;
+    clear: both;
+    padding-top: 65px;
+    padding-bottom: 130px;
+    text-align: center;
+}
+
+.blog_set {
+    float: left;
+}
+
+.blog_set a {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.edit_del_tag ul {
+    padding: 0;
+    border-top: 1px dotted #d3d3d3;
+}
+
+.edit_del_tag ul li {
+    float: left;
+    list-style: none;
+    overflow: hidden;
+    display: block;
+    clear: both;
+    width: 100%;
+    border-bottom: 1px dotted #d3d3d3;
+}
+
+#tag_modal .modal-body {
+    padding-bottom: 20px;
+}
+
+.writeinfo {
+    padding: 5px 0 5px 20px;
+    display: none;
+}
+
+.writeinfo input {
+    display: inline-block;
+    margin-right: 5px;
+    width: 200px;
+    height: 26px;
+    padding: 3px 3px 4px;
+    line-height: 24px;
+    border: 1px solid #C2C3BD;
+    color: #999;
+}
+
+.writeinfo a {
+    font-size: 12px;
+    line-height: 23px;
+    padding: 0 10px 0 8px;
+    display: inline-block;
+    height: 25px;
+    min-width: 68px;
+    text-align: center;
+    border:1px solid #00a0e9;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.writeinfo a:hover {
+    text-decoration: none;
+}
+
+.htit {
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    width: 350px;
+    padding-left: 20px;
+}
+
+.control {
+    display: inline-block;
+    height:35px;
+    line-height: 35px;
+}
+
+#errTips, .errTips {
+    display: none;
+    color: #c00;
+    font-weight: 700;
+}

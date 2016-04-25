@@ -1,0 +1,29 @@
+<% if (locals.user) { %>
+<div id='menu'>
+    <div class="in_menu">
+        <div class="logo">
+            <% if (user.user_logo) { %>
+                <img src="/images/logo/<%= user._id %>.jpg">
+            <% }else {%>
+            <img src="/images/logo/default.jpg">
+            <% }%>
+        </div>
+        <div class="username">
+            <%= user.user_username %>
+        </div>
+        <div class="logout">
+            <a href='/logout'>注销</a>
+        </div>
+        <div >
+            <a href='/set/intro'>个人资料</a>
+        </div>
+    </div>
+</div>
+<% } else { %>
+<div id='menu'>
+    <div class="in_menu">
+        <a href='/register'>注册</a>
+        <a href='/login'>登录</a>
+    </div>
+</div>
+<% } %>

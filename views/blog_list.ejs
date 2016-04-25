@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="blog_list">
+    <% include menu %>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <div class="nav navbar-nav">
+                    <li><a href="">首页</a></li>
+                    <li><a href="#">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
+                </div>
+            </nav>
+        </div>
+        <div class="my_func">
+            <a href="" class="write_link"><em class="wte"></em>写日志</a>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <div class="tag_list">
+                    <h4>分&nbsp;&nbsp;&nbsp;&nbsp;类</h4>
+                    <ul>
+                        <li><a href="" data-toggle="modal" data-target="#tag_modal">[编辑分类]</a></li>
+                        <% for(var i in tags) {%>
+                        <li><a href=""><%= tags[i].tag_name %></a><em>(0)</em></li>
+                        <% }%>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="blog_list">
+                    <div class="blog_list_head">
+                        <span>全部博客<em>(0)</em></span>
+                    </div>
+                    <div class="blog_list_body">
+                        <div class="blog_list_blk">
+                            <!--<div class="blog_nodata">此分类暂无博文，你可以在发表博文和编辑博文的时候进行归类。</div>-->
+                            <div class="blog_box">
+                                <div class="blog_cell">
+                                    <p class="blog_title"><a href="">abcd</a></p>
+                                    <p class="blog_info">
+                                        <span class="blog_time">2016-04-20 22:59</span>
+                                        <span class="blog_set"><a href="">[编辑]</a><a href="">[删除]</a></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="tag_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title">编辑分类</h5>
+                </div>
+                    <div class="modal-body">
+                        <div class="create_tag">
+                            <input type="text" maxlength="28" placeholder="最多可输入14个中文字符" id="categoryName" class="form-control">
+                            <button type="button" class="cre_tag">创建分类</button>
+                            <div id="errTips"></div>
+                        </div>
+                        <div class="edit_del_tag">
+                            <ul class="clearfix">
+                                <% for(var i in tags){ %>
+                                <li>
+                                    <span class="htit"><%= tags[i].tag_name %></span>
+                                    <input type="hidden" value=<%= tags[i].tag_name %> name="typename[]" class="catName" maxlength="14">
+                                    <span class="control"><a href="javascript:;"class="edit_tag">[编辑]</a><a href="javascript:;" class="del_tag"  data-toggle="modal" data-target="#del_modal">[删除]</a></span>
+                                    <div  class="writeinfo">
+                                        <input  type="text" value="" class="form-control">
+                                        <a class="edit_con" href="javascript:;">确定</a>
+                                        <a class="edit_can" href="javascript:;">取消</a>
+                                        <div class="errTips"></div>
+                                    </div>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="del_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    确实要删除此分类吗？删除后不可恢复。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script src="/javascripts/jquery-1.11.1.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+    <!--创建标签-->
+    <script>
+        $(document).on('click','.cre_tag',function(){
+            var tagname = $('#categoryName').val();
+            var only = false;
+            if(! tagname) {
+                $('#errTips').show().text('分类名称不能为空')
+            } else{
+                $('.catName').each(function(){
+                    if($(this).attr('value') == tagname) {
+                        $('#errTips').text('您已经添加过此分类').show();
+                        only = true
+                    }
+                })
+                if(!only) {
+                    $.post('/createtag',{name:tagname},function(result){
+                        window.location.reload()
+                    })
+                }
+            }
+        })
+    </script>
+    <!--编辑标签-->
+    <script>
+        $(document).on('click','.edit_tag',function(){
+            var li = $(this).parent().parent();
+            li.children('.writeinfo').show();
+            li.children('.htit').hide();
+            li.children('.control').hide();
+            li.children('.writeinfo').children('.form-control').val(li.children('.catName').attr('value'))
+        })
+        $(document).on('click','.edit_can',function(){
+            var li = $(this).parent().parent();
+            li.children('.writeinfo').hide();
+            li.children('.htit').show()
+            li.children('.control').show();
+            $(this).parent().children('.errTips').val('').hide()
+        })
+
+        $(document).on('click','.edit_con',function(){
+            var only = false;
+            var tagname = $(this).parent().children('.form-control').val()
+            console.log(tagname)
+            if(! tagname){
+                $('.errTips').show().text('分类名称不能为空')
+            } else{
+                $('.catName').each(function(){
+                    if($(this).attr('value') == tagname) {
+                        $('.errTips').text('您已经添加过此分类').show();
+                        only = true
+                    }
+                })
+                if(!only) {
+
+                }
+            }
+        })
+    </script>
+
+    <!--删除-->
+    <script>
+        $(document).on('click','.del_tag',function(){
+
+        })
+    </script>
+
+    <!--关闭-->
+    <script>
+        $(document).on('hidden.bs.modal','#tag_modal', function () {
+            $('#errTips').hide().val('');
+            $('.errTips').hide().val('');
+            $('.htit').show()
+            $('.writeinfo').hide();
+            $('.control').show();
+            $('.form-control').show().val('')
+        })
+    </script>
+</body>
+</html>

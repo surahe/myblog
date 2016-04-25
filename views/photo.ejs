@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="photo">
+<% include menu %>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <div class="nav navbar-nav">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="photo_operation">
+                    <a href=""  class="upload_photo" data-toggle="modal" data-target="#upload_photo">上传图片</a>
+                </div>
+                <div class="photobody">
+                    <ul class="photo_list">
+                        <% if(picturename) {%>
+                            <% for(var i = 0; i < picturename.length; i++) {%>
+                                <li>
+                                    <div class="photo_border">
+                                        <p>
+                                            <a href="">
+                                                <img id="<%= pictureid[i] %>" title="<%= picturename[i] %>" src="/images/album/<%= userid %>/<%= albumname %>/small/<%= picturename[i] %>.<%= picturetype[i] %>"/>
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div >
+                                        <div class="photo_titie" ><a href=""><%= picturename[i] %></a> </div>
+                                        <a href="javascript:;" class="edit_tile" >[编辑]</a>
+                                        <div class="edit_box" style="display: none;">
+                                            <p class="edit_input">
+                                                <input class="photo_input"  id="" maxlength="30" name="new_title" value=<%= picturename[i] %>>
+                                            </p>
+                                            <p class="error_msg"style="display: none;"></p>
+                                            <p class="photo_btn">
+                                                <a class="edit_save" href="javascript:;">
+                                                    <span>保存</span>
+                                                </a>
+                                                &nbsp;
+                                                <a class="edit_cancel" href="javascript:;">
+                                                    <span>取消</span></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p id=""><a href="" class="photo_function set_cover">设为封面</a> | <a href="" class="photo_function del_photo" data-toggle="modal" data-target="#photo_del_modal" >删除</a></p>
+                                </li>
+                            <% } %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="modal fade" id="upload_photo" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">上传图片</h4>
+            </div>
+            <form action="/<%= blogger%>/album/<%= albumname%>" method="post" id="photo_form" enctype="multipart/form-data">
+                <div class="choose_pic upload_pic">
+                    <button type="button" class="btn btn-default" id="choose_photo">选择图片</button>
+                    <input type="file" id="file" name="file" multiple="multiple" class="hidden" onchange=getname()><br>
+                    <span class="desc">支持jpg、png、bmp格式的图片，且文件小于10M</span>
+                </div>
+                <div class="modal-body">
+                    <label for="photo_name" class="control-label">图片名称: </label>
+                    <input type="text" class="form-control" id="photo_name" name="photo[name]">
+                    <span id="postfix"></span>
+                    <input type="text" name="photo[type]" class="hidden" id="photo_type">
+                    <input type="text" name="photo[album]" class="hidden" id="photo_album" value="<%= albumname %>">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="album_creave">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="photo_del_modal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">删除图片</h4>
+            </div>
+            <form action="/photo_del" method="post" id="album_edit">
+                <div class="modal-body">
+                    <label for="photo_name" class="control-label">是否要删除此图片 </label>
+                    <input type="hidden" value="" name="del_name" id="del_name">
+                    <input type="hidden" value="" name="photo_index" id="photo_index">
+                    <input type="hidden" value="" name="photo_album" id="del_photo_album">
+                    <input type="hidden" value="" name="photo_id" id="del_photo_id">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/jquery-1.11.1.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="/javascripts/jquery.form.js"></script>
+<script>
+    var $file = $("#file");
+    var $choosebox = $("#choose_photo");
+    //设置选择图片按钮
+    $choosebox.click(function(){
+        $file.click();
+    });
+
+    function getname() {
+        var file = $("#file").val();
+        var strFileName = file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
+        var fileExt = file.replace(/.+\./,"");   //正则表达式获取后缀
+        if (fileExt != "bmp" && fileExt != "png"  && fileExt != "jpg" && fileExt != "jpeg") {
+            alert("图片限于bmp、png、jpeg、jpg格式");
+            return false;
+        }
+
+        $('#photo_name').val(strFileName);
+        $('#postfix').text("." + fileExt);
+        $('#photo_type').val(fileExt)
+    }
+
+    $('.edit_tile').click(function(){
+        $('.edit_cancel').trigger('click')
+        $(this).parent().children('.photo_titie').hide();
+        $(this).hide();
+        $(this).parent().children('.edit_box').show()
+    })
+    $('.edit_cancel').click(function(){
+        $(this).parent().parent().parent().children('.photo_titie').show();
+        $(this).parent().parent().parent().children('.edit_tile').show();
+        $(this).parent().parent().parent().children('.edit_box').hide();
+        var cancel_name = $(this).parent().parent().parent().parent().children('.photo_border').children().children().children().attr('title')
+        $(this).parent('.photo_btn').parent().children('.edit_input').children().val(cancel_name)
+    })
+</script>
+<script>
+    $('#photo_form').ajaxForm({
+        success: function(){
+            alert("上传成功")
+            window.location.reload(true)
+        }
+    });
+    $('.edit_save').click(function(){
+        var edit_id = $(this).parents('li').children('div').children('p').children('a').children('img').attr('id');
+        var new_title =  $(this).parent('.photo_btn').parent('.edit_box').children('.edit_input').children().val()
+        var albumname = "<%= albumname%>"
+        $.ajax({
+            url:"/photo_edit",
+            method: "post",
+            data: {
+                edit_id: edit_id,
+                new_title: new_title,
+                album_name: albumname,
+            },
+            success: function(){
+                window.location.reload(true)
+            }
+        })
+    })
+
+    $('.del_photo').click(function(){
+        var album_name = "<%= albumname%>";
+        var index = parseInt("<%= page_index %>") - 1;
+        var picture_name = "<%= picturename %>".split(',');
+        var picture_type = "<%= picturetype %>".split(',');
+        var picture_id = "<%= pictureid%>".split(',');
+
+        $('#del_photo_album').attr('value',album_name)
+        $('#del_name').attr('value', picture_name[$(this).parent().parent().index()] + "." + picture_type[$(this).parent().parent().index()])
+        $('#photo_index').attr('value',$(this).parent().parent().index())
+        $('#del_photo_id').attr('value',picture_id[$(this).parent().parent().index()])
+
+    })
+
+    $('.set_cover').click(function() {
+        var album_name = "<%= albumname %>";
+        var picture_name = "<%= picturename %>".split(',');
+        var picture_type = "<%= picturetype %>".split(',');
+        var index = parseInt("<%= page_index %>") - 1;
+        var pictureName = picture_name[$(this).parent().parent().index()] + "." + picture_type[$(this).parent().parent().index()]
+        $.ajax({
+            url: '/photo_cover',
+            method: 'post',
+            data: {
+                pictureName:pictureName,
+                albumName: album_name
+            },
+            success: function() {
+                alert('设置成功')
+            }
+        })
+    })
+</script>
+</body>
+</html>
