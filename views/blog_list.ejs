@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="blog_list">
+    <% include menu %>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <div class="nav navbar-nav">
+                    <li><a href="">首页</a></li>
+                    <li><a href="#">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
+                </div>
+            </nav>
+        </div>
+        <div class="my_func">
+            <a href="" class="write_link"><em class="wte"></em>写日志</a>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <div class="tag_list">
+                    <h4>分&nbsp;&nbsp;&nbsp;&nbsp;类</h4>
+                    <ul>
+                        <li><a href="">[编辑分类]</a></li>
+                        <li><a href="">所有博客</a><em>(0)</em></li>
+                        <li><a href="">默认分类</a><em>(0)</em></li>
+                        <li><a href="">HTML</a><em>(0)</em></li>
+                        <li><a href="">CSS</a><em>(0)</em></li>
+                        <li><a href="">JS</a><em>(0)</em></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="blog_list">
+                    <div class="blog_list_head">
+                        <span>全部博客<em>(0)</em></span>
+                    </div>
+                    <div class="blog_list_body">
+                        <div class="blog_list_blk">
+                            <!--<div class="blog_nodata">此分类暂无博文，你可以在发表博文和编辑博文的时候进行归类。</div>-->
+                            <div class="blog_box">
+                                <div class="blog_cell">
+                                    <p class="blog_title"><a href="">abcd</a></p>
+                                    <p class="blog_info">
+                                        <span class="blog_time">2016-04-20 22:59</span>
+                                        <span class="blog_set"><a href="">[编辑]</a><a href="">[删除]</a></span>
+                                    </p>
+                                </div>
+                                <div class="blog_cell">
+                                    <p class="blog_title"><a href="">abcd</a></p>
+                                    <p class="blog_info">
+                                        <span class="blog_time">2016-04-20 22:59</span>
+                                        <span class="blog_set"><a href="">[编辑]</a><a href="">[删除]</a></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/jquery-1.11.1.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+</body>
+</html>

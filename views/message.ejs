@@ -1,0 +1,16 @@
+<% if (locals.messages) { %>
+    <% messages.forEach(function(message) { %>
+        <% if (message.type == 'error') { %>
+            <div class="alert alert-danger">
+                <%= message.string %>
+            </div>
+        <% } %>
+
+        <% if (message.type == 'success') { %>
+        <div class="alert alert-success">
+            <%= message.string %>
+        </div>
+        <% } %>
+    <% }) %>
+    <% removeMessages() %>
+<% } %>

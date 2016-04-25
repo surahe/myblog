@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传头像</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/jquery.Jcrop.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="logo">
+<% include menu %>
+<div class="container">
+    <div class="row">
+        <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+            <div class="nav navbar-nav">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">日志</a></li>
+                <li><a href="http://localhost:3000/<%= user.user_account %>/album">相册</a></li>
+                <li><a href="http://localhost:3000/<%= user.user_account %>/about">关于我</a></li>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="/set/logo">上传头像</a></li>
+                <li><a href="/set/modify">修改密码</a></li>
+                <li><a href="/set/intro">个人资料</a></li>
+                <li><a href="/set/contact">联系方式</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="choose_pic">
+                <button type="button" class="btn btn-default" id="choosebox">选择图片</button>
+                <span class="desc">支持jpg、png、bmp格式的图片，且文件小于10M</span>
+            </div>
+            <form action="/set/logo" method="post" name="form" id="form" enctype="multipart/form-data">
+                <input type="file" id="file" name="file" multiple="multiple" onchange=previewImage(this) class="hidden"/><br>
+                <div id="preview">
+                </div>
+                <div id="preview-pane">
+                    <span class="desc">50px × 50px</span>
+                    <div class="preview-container_s">
+                        <img  class="jcrop-preview" id="preview_small" src="<%=  logo %>"/>
+                    </div>
+                    <span class="desc">180px × 180px</span>
+                    <div class="preview-container">
+                        <img  class="jcrop-preview" id="preview_large" src="<%=  logo %>"/>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <input type="hidden" name="width" id="width">
+                <input type="hidden" name="height" id="height">
+                <input type="hidden" name="pre_width" id="pre_width">
+                <input type="hidden" name="pre_height" id="pre_height">
+                <input type="hidden" name="x" id="x">
+                <input type="hidden" name="y" id="y">
+                <input type="hidden" name="w" id="w">
+                <input type="hidden" name="h" id="h">
+                <div class="save_pic">
+                    <button type="submit" class="btn btn-default" disabled="disabled" id="logo_submit">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/jquery-1.11.1.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="/javascripts/preview.js"></script>
+<script src="/javascripts/jquery.Jcrop.js"></script>
+<script>
+    var $file = $("#file");
+    var $choosebox = $("#choosebox");
+
+    //设置选择图片按钮
+    $choosebox.click(function(){
+        $file.click();
+    });
+</script>
+</body>
+</html>

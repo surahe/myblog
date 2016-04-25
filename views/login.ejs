@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="register">
+<% include menu %>
+<div class="container">
+    <div class="form">
+        <h2 class="form-signin-heading">登录</h2>
+        <% include message.ejs %>
+        <form action='/login' method='post'>
+            <div class="form-group">
+                <input type="text" class="form-control" id="account"name='user[account]' placeholder="账号" maxlength="18">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" name='user[password]' placeholder="密码" maxlength="16">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="captcha" name='user[captcha]' placeholder="验证码" maxlength="4" >
+                <img id="captcha-photo" src="/captcha.jpg"/>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        </form>
+    </div>
+</div>
+<script src="/javascripts/jquery-1.11.1.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+
+</body>
+</html>

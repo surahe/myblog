@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="set">
+    <% include menu %>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <div class="nav navbar-nav">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= user.user_account %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= user.user_account %>/about">关于我</a></li>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="nav nav-tabs">
+                    <li><a href="/set/logo">上传头像</a></li>
+                    <li><a href="/set/modify">修改密码</a></li>
+                    <li class="active"><a href="/set/intro">个人资料</a></li>
+                    <li><a href="/set/contact">联系方式</a></li>
+                </ul>
+                <form action="/set/intro" class="form-horizontal" method="post">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="personal-data">
+                            <div class="form-group">
+                                <label for="full-name" class="col-md-2 control-label">姓名：</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" id="full-name" placeholder="姓名" name="intro[name]"  value=<%= name %> >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">性别：</label>
+                                <input type="text" id="getGender" class="hidden" value=<%= gender %> >
+                                <div class="col-md-4">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="intro[gender]" id="male" value="0"> 男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="intro[gender]" id="female" value="1"> 女
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">出生日期：</label>
+                                <input type="text" id="getYear" class="hidden" value=<%=  birthYear %> >
+                                <input type="text" id="getMonth" class="hidden" value=<%= birthMonth %> >
+                                <input type="text" id="getDate" class="hidden" value=<%= birthDate %> >
+                                <div id="birthday" class=" col-md-6"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">现居地：</label>
+                                <input type="text" id="getProvince" class="hidden" value=<%= province %> >
+                                <input type="text" id="getCity" class="hidden" value=<%= city %> >
+                                <div id="city" class="col-md-5">
+                                    <select class="prov form-control" name="intro[province]"></select>
+                                    <select class="city form-control"  name="intro[city]"  id="province"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">婚姻：</label>
+                                <input type="text" id="getMarriage" class="hidden" value=<%= marriage %> >
+                                <div id="marriage" class="col-md-3">
+                                    <select name="intro[marriage]" class="form-control">
+                                        <option value="0">请选择</option>
+                                        <option value="1">单身</option>
+                                        <option value="2">热恋中</option>
+                                        <option value="3">订婚</option>
+                                        <option value="4">已婚</option>
+                                        <option value="5">离异</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="job" class="col-md-2 control-label">职业：</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" id="job" placeholder="职业" name="intro[job]"  value=<%= job %> >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% include message.ejs %>
+                    <div class="save">
+                        <button type="submit" class="btn btn-primary ">确认</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/jquery-1.11.1.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+    <script >
+        (function( $ ){
+
+            // plugin variables
+            var months = {
+                        "short": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]},
+                    todayDate = new Date(),
+                    todayYear = todayDate.getFullYear(),
+                    todayMonth = todayDate.getMonth() + 1,
+                    todayDay = todayDate.getDate();
+
+            var default_year =  "<%= birthYear%>" ;
+            var default_month =  "<%= birthMonth%>";
+            var default_date =  "<%= birthDate%>";
+
+            if(parseInt(default_month)<10) {
+                default_month = "0" + default_month
+            };
+            if(parseInt(default_date)<10) {
+                default_date = "0" + default_date
+            };
+            console.log(default_date)
+            $.fn.birthdaypicker = function( options ) {
+
+                var settings = {
+                    "maxAge" : 100,                    //设置“年”下拉表中年的个数，这里设置为10则显示最近10年的，默认值为120。
+                    "minAge" : 0,                      //与maxAge相对，如果当前年为2013年，并且设置了minAge为20，那么最早可以选择的年限为1993年。
+                    "futureDates" : false,            //将来（未来）时间是否可以选择
+                    "maxYear" : todayYear,
+                    "dateFormat" : "middleEndian",    //bigEndian： “年月日” ，littleEndian：“日月年”，否则 “月日年”
+                    "monthFormat" : "short",
+                    "placeholder" : true,
+                    "defaultDate" : default_year + "-" + default_month + "-" +default_date,            //元素初始时的值
+                    "fieldName" : "intro[birthdate]",        //隐藏域元素的name值
+                    "fieldId" : "birthdate",          //隐藏域元素的id值
+                    "hiddenDate" : true,              //是否要添加一个时间隐藏域
+                    "onChange" : null,
+                    "tabindex" : null,
+                    "wraper" : "fieldset",            //为盛放select元素的容器
+                    "legend" : "",
+                };
+
+                return this.each(function() {
+
+                    if (options) { $.extend(settings, options); }
+
+                    // Create the html picker skeleton
+                    var _wrap = "<" + settings['wraper']  + " class='birthday-picker'></" + settings['wraper'] + ">";
+
+                    // var $wraper = $("<fieldset class='birthday-picker'></fieldset>"),
+                    var $wraper = $(_wrap),
+                            $year = $("<select class='birth-year form-control' name='birth[year]'></select>"),
+                            $month = $("<select class='birth-month form-control' name='birth[month]'></select>"),
+                            $day = $("<select class='birth-day form-control' name='birth[date]'></select>");
+
+                    if (settings["legend"]) { $("<legend>" + settings["legend"] + "</legend>").appendTo($wraper); }
+
+                    var tabindex = settings["tabindex"];
+
+                    // Deal with the various Date Formats
+                    if (settings["dateFormat"] == "bigEndian") {
+                        $wraper.append($year).append($month).append($day);
+                        if (tabindex != null) {
+                            $year.attr('tabindex', tabindex);
+                            $month.attr('tabindex', tabindex++);
+                            $day.attr('tabindex', tabindex++);
+                        }
+                    } else if (settings["dateFormat"] == "littleEndian") {
+                        $wraper.append($day).append($month).append($year);
+                        if (tabindex != null) {
+                            $day.attr('tabindex', tabindex);
+                            $month.attr('tabindex', tabindex++);
+                            $year.attr('tabindex', tabindex++);
+                        }
+                    } else {
+                        $wraper.append($month).append($day).append($year);
+                        if (tabindex != null) {
+                            $month.attr('tabindex', tabindex);
+                            $day.attr('tabindex', tabindex++);
+                            $year.attr('tabindex', tabindex++);
+                        }
+                    }
+
+                    // Add the option placeholders if specified
+                    if (settings["placeholder"]) {
+                        $("<option value='0'>年</option>").appendTo($year);
+                        $("<option value='0'>月</option>").appendTo($month);
+                        $("<option value='0'>日</option>").appendTo($day);
+                    }
+
+                    var hiddenDate;
+                    if (settings["defaultDate"]) {
+                        var defDate = new Date(settings["defaultDate"] + "T00:00:00"),
+                                defYear = defDate.getFullYear(),
+                                defMonth = defDate.getMonth() + 1,
+                                defDay = defDate.getDate();
+                        if (defMonth<10) defMonth="0"+defMonth;
+                        if (defDay<10) defDay="0"+defDay;
+                        hiddenDate = defYear + "-" + defMonth + "-" + defDay;
+                        console.log(settings["defaultDate"] + "T00:00:00")
+                    }
+
+                    // Create the hidden date markup
+                    if (settings["hiddenDate"]) {
+                        $("<input type='hidden' name='" + settings["fieldName"] + "'/>")
+                                .attr("id", settings["fieldId"])
+                                .val(hiddenDate)
+                                .appendTo($wraper);
+                    }
+
+                    // Build the initial option sets
+                    var startYear = todayYear - settings["minAge"];
+                    var endYear = todayYear - settings["maxAge"];
+                    if (settings["futureDates"] && settings["maxYear"] != todayYear) {
+                        if (settings["maxYear"] > 1000) { startYear = settings["maxYear"]; }
+                        else { startYear = todayYear + settings["maxYear"]; }
+                    }
+                    for (var i=startYear; i>=endYear; i--) { $("<option></option>").attr("value", i).text(i).appendTo($year); }
+                    for (var j=0; j<12; j++) { $("<option></option>").attr("value", j+1).text(months[settings["monthFormat"]][j]).appendTo($month); }
+                    for (var k=1; k<32; k++) { $("<option></option>").attr("value", k).text(k).appendTo($day); }
+                    $(this).append($wraper);
+                    // Set the default date if given
+                    if (settings["defaultDate"]) {
+                        var date = new Date(settings["defaultDate"] + "T00:00:00");
+                        $year.val(date.getFullYear());
+                        $month.val(date.getMonth() + 1);
+                        $day.val(date.getDate());
+                    }
+
+                    // Update the option sets according to options and user selections
+                    $wraper.change(function() {
+                        // todays date values
+                        var todayDate = new Date(),
+                                todayYear = todayDate.getFullYear(),
+                                todayMonth = todayDate.getMonth() + 1,
+                                todayDay = todayDate.getDate(),
+                        // currently selected values
+                                selectedYear = parseInt($year.val(), 10),
+                                selectedMonth = parseInt($month.val(), 10),
+                                selectedDay = parseInt($day.val(), 10),
+                        // number of days in currently selected year/month
+                                actMaxDay = (new Date(selectedYear, selectedMonth, 0)).getDate(),
+                        // max values currently in the markup
+                                curMaxMonth = parseInt($month.children(":last").val()),
+                                curMaxDay = parseInt($day.children(":last").val());
+
+                        // Dealing with the number of days in a month
+                        // http://bugs.jquery.com/ticket/3041
+                        if (curMaxDay > actMaxDay) {
+                            while (curMaxDay > actMaxDay) {
+                                $day.children(":last").remove();
+                                curMaxDay--;
+                            }
+                        } else if (curMaxDay < actMaxDay) {
+                            while (curMaxDay < actMaxDay) {
+                                curMaxDay++;
+                                $day.append("<option value=" + curMaxDay + ">" + curMaxDay + "</option>");
+                            }
+                        }
+
+                        // Dealing with future months/days in current year
+                        // or months/days that fall after the minimum age
+                        if (!settings["futureDates"] && selectedYear == startYear) {
+                            if (curMaxMonth > todayMonth) {
+                                while (curMaxMonth > todayMonth) {
+                                    $month.children(":last").remove();
+                                    curMaxMonth--;
+                                }
+                                // reset the day selection
+                                $day.children(":first").attr("selected", "selected");
+                            }
+                            if (selectedMonth === todayMonth) {
+                                while (curMaxDay > todayDay) {
+                                    $day.children(":last").remove();
+                                    curMaxDay -= 1;
+                                }
+                            }
+                        }
+
+                        // Adding months back that may have been removed
+                        // http://bugs.jquery.com/ticket/3041
+                        if (selectedYear != startYear && curMaxMonth != 12) {
+                            while (curMaxMonth < 12) {
+                                $month.append("<option value=" + (curMaxMonth+1) + ">" + months[settings["monthFormat"]][curMaxMonth] + "</option>");
+                                curMaxMonth++;
+                            }
+                        }
+
+                        // update the hidden date
+                        if ((selectedYear * selectedMonth * selectedDay) != 0) {
+                            if (selectedMonth<10) selectedMonth="0"+selectedMonth;
+                            if (selectedDay<10) selectedDay="0"+selectedDay;
+                            hiddenDate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+                            $(this).find('#'+settings["fieldId"]).val(hiddenDate);
+                            if (settings["onChange"] != null) {
+                                settings["onChange"](hiddenDate);
+                            }
+                        } else {
+                            hiddenDate = "";
+                            $(this).find('#'+settings["fieldId"]).val(hiddenDate);
+                        }
+                    });
+                });
+            };
+        })( jQuery );
+    </script>
+    <script src="/javascripts/jquery.cityselect.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                "dateFormat": "bigEndian",
+                "wraper" : "span",
+//              "defaultDate": "1993-04-24"
+            };
+            $("#birthday").birthdaypicker(options);
+
+            $("#city").citySelect({
+                nodata:"none",
+                required:false,
+                prov: $('#getProvince').val(),
+                city: $('#getCity').val()
+            });
+            $("input[name='intro[gender]']").each(function(){
+                if($(this).val() == Number($('#getGender').val())) {
+                    $(this).attr("checked", "checked")
+                }
+            });
+            $("select[name='intro[marriage]']").children().each(function(){
+                if($(this).val() == $('#getMarriage').val()) {
+                    $(this).attr("selected", "selected")
+                }
+            });
+            $("select[name='birth[year]").children().each(function(){
+                if($(this).val() == $('#getYear').val()) {
+                    $(this).attr("selected", "selected")
+                }
+            });
+            $("select[name='birth[month]").children().each(function(){
+                if($(this).val() == $('#getMonth').val()) {
+                    $(this).attr("selected", "selected")
+                }
+            })
+            $("select[name='birth[date]").children().each(function(){
+                if($(this).val() == $('#getDate').val()) {
+                    $(this).attr("selected", "selected")
+                }
+            })
+        })
+    </script>
+</body>
+</html>
