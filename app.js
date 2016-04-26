@@ -88,7 +88,7 @@ app.get('/write',write.show)
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'),write.submit));
 app.get('/get_tag', write.getTag)
 
-app.get('/:blogname/bloglist',blogList.show)
+app.get('/:blogname/bloglist/:tagnumber?',blogList.show)
 app.post('/createtag',blogList.create)
 app.post('/deletetag',blogList.del)
 app.post('/edittag',blogList.edit)

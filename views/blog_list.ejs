@@ -11,6 +11,7 @@
     <div class="container">
         <div class="row">
             <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <h4><a href=""><%= bloggername%>的博客</a></h4>
                 <div class="nav navbar-nav">
                     <li><a href="">首页</a></li>
                     <li><a href="#">日志</a></li>
@@ -20,7 +21,6 @@
             </nav>
         </div>
         <div class="my_func">
-
             <a href="../write" class="write_link"><em class="wte"></em>写日志</a>
         </div>
         <div class="row">
@@ -29,10 +29,10 @@
                     <h4>分&nbsp;&nbsp;&nbsp;&nbsp;类</h4>
                     <ul>
                         <li><a href="" data-toggle="modal" data-target="#tag_modal">[编辑分类]</a></li>
-                        <li><a href="">所有博客</a><em>(<%=blog_count %>)</em></li>
-                        <li><a href="">默认分类</a><em>(<%= df_count %>)</em></li>
+                        <li><a href= http://localhost:3000/<%= blogger%>/bloglist >所有博客</a><em>(<%=blog_count %>)</em></li>
+                        <li><a href= http://localhost:3000/<%= blogger%>/bloglist/00 >默认分类</a><em>(<%= df_count %>)</em></li>
                         <% for(var i in tags) {%>
-                        <li><a href=""><%= tags[i].tag_name %></a><em>(<%=tag_count[i] %>)</em></li>
+                            <li><a href= http://localhost:3000/<%= blogger%>/bloglist/<%=tags[i].tag_number %> > <%= tags[i].tag_name %></a><em>(<%=tag_count[i] %>)</em></li>
                         <% }%>
                     </ul>
                 </div>
@@ -40,20 +40,25 @@
             <div class="col-md-8">
                 <div class="blog_list">
                     <div class="blog_list_head">
-                        <span>全部博客<em>(0)</em></span>
+                        <span><%= tag_name %><em>(<%= tag_number%>)</em></span>
                     </div>
                     <div class="blog_list_body">
                         <div class="blog_list_blk">
-                            <!--<div class="blog_nodata">此分类暂无博文，你可以在发表博文和编辑博文的时候进行归类。</div>-->
+                            <% if(blog_list.length) {%>
                             <div class="blog_box">
+                                <% for(var i =  blog_list.length -1 ; i >= 0; i--) {%>
                                 <div class="blog_cell">
-                                    <p class="blog_title"><a href="">abcd</a></p>
+                                    <p class="blog_title"><a href=""><%= blog_list[i].blog_title %></a></p>
                                     <p class="blog_info">
-                                        <span class="blog_time">2016-04-20 22:59</span>
+                                        <span class="blog_time"><%= blog_list[i].blog_time.getFullYear() +"-"+ (blog_list[i].blog_time.getMonth() + 1) +"-"+ blog_list[i].blog_time.getDate() + " " + blog_list[i].blog_time.getHours() + ":" + blog_list[i].blog_time.getMinutes() %></span>
                                         <span class="blog_set"><a href="">[编辑]</a><a href="">[删除]</a></span>
                                     </p>
                                 </div>
+                                <% } %>
                             </div>
+                            <% }else {%>
+                            <div class="blog_nodata">此分类暂无博文，你可以在发表博文和编辑博文的时候进行归类。</div>
+                            <% }%>
                         </div>
                     </div>
                 </div>

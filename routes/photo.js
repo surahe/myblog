@@ -33,7 +33,8 @@ exports.show = function(req,res) {
                 picturename: picture_name_box,
                 picturetype: picture_type_box,
                 pictureid: picture_id_box,
-                page_index: page.number
+                page_index: page.number,
+                bloggername: user.user_username
             });
         });
     })
