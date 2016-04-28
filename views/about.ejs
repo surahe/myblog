@@ -7,91 +7,92 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body id="ablut">
-<% include menu %>
-<div class="container">
-    <div class="row">
-        <nav class="navbar col-md-10 col-md-offset-1" id="nav">
-            <h4><a href=""><%= bloggername%>的博客</a></h4>
-            <div class="nav navbar-nav">
-                <li><a href="">首页</a></li>
-                <li><a href="http://localhost:3000/<%= blogname %>/bloglist">日志</a></li>
-                <li><a href="http://localhost:3000/<%= blogname %>/album">相册</a></li>
-                <li><a href="http://localhost:3000/<%= blogname %>/about">关于我</a></li>
-            </div>
-        </nav>
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-md-offset-1">
-            <div class="per_data">
-                <div class="data_head">
-                    <span>个人资料</span>
+    <% include menu %>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <h4><a href=""><%= bloggername%>的博客</a></h4>
+                <div class="nav navbar-nav">
+                    <li><a href="">首页</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/bloglist">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/about">关于我</a></li>
                 </div>
-                <div class="data_body">
-                    <div class="data_img">
-                        <% if (logo) { %>
-                        <img src="<%= logo %>">
-                        <% }else {%>
-                        <img src="/images/logo/default.jpg">
-                        <% }%>
-                    </div>
-                    <div class="data_name">
-                        <span><%= username %></span>
-                    </div>
-                </div>
-            </div>
+            </nav>
         </div>
-        <div class="col-md-7">
-            <div class="per_file">
-                <div class="file_title"><span>我的档案</span></div>
-                <div class="file_body">
-                    <div class="file_in">
-                        <div class="component">
-                            <div class="basic_file">
-                                <div class="basic_title">基本信息：</div>
-                                <table class="per_table">
-                                    <tbody>
-                                        <% if (name) { %>
-                                            <tr><td class="tr_title">姓&nbsp;&nbsp;&nbsp;名：</td><td><%= name %></td></tr>
-                                        <% } %>
-                                        <% if (gender) { %>
-                                            <tr><td class="tr_title">性&nbsp;&nbsp;&nbsp;别：</td><td><%= gender %></td></tr>
-                                        <% } %>
-                                        <% if (birthdate) { %>
-                                            <tr><td class="tr_title">生&nbsp;&nbsp;&nbsp;日：</td><td><%= birthdate %></td></tr>
-                                        <% } %>
-                                        <% if (city) { %>
-                                            <tr><td class="tr_title">城&nbsp;&nbsp;&nbsp;市：</td><td><%= city %></td></tr>
-                                        <% } %>
-                                        <% if (marriage) { %>
-                                            <tr><td class="tr_title">婚&nbsp;&nbsp;&nbsp;姻：</td><td><%= marriage %></td></tr>
-                                        <% } %>
-                                        <% if (job) { %>
-                                            <tr><td class="tr_title">职&nbsp;&nbsp;&nbsp;业：</td><td><%= job %></td></tr>
-                                        <% } %>
-                                        <% if ( ! (name || gender || birthdate|| city|| marriage || job)) {%>
-                                            <tr><td>暂未添加。</td></tr>
-                                        <% }%>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="basic_file">
-                                <div class="basic_title">联系方式：</div>
-                                <table class="contact_table">
-                                    <tbody>
-                                        <% if (email) { %>
-                                            <tr><td class="tr_title">邮&nbsp;&nbsp;&nbsp;箱：</td><td><%= email %></td></tr>
-                                        <% } %>
-                                        <% if (phone) { %>
-                                            <tr><td class="tr_title">手&nbsp;&nbsp;&nbsp;机：</td><td><%= phone %></td></tr>
-                                        <% } %>
-                                        <% if (qq) { %>
-                                            <tr><td class="tr_title">Q&nbsp;&nbsp;&nbsp;&nbsp;Q：</td><td><%= qq %></td></tr>
-                                        <% } %>
-                                        <% if ( ! (email || phone ||qq)) {%>
-                                            <tr><td>暂未添加。</td></tr>
-                                        <% }%>
-                                    </tbody>
-                                </table>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <div class="per_data">
+                    <div class="data_head">
+                        <span>个人资料</span>
+                    </div>
+                    <div class="data_body">
+                        <div class="data_img">
+                            <% if (logo) { %>
+                            <img src="<%= logo %>">
+                            <% }else {%>
+                            <img src="/images/logo/default.jpg">
+                            <% }%>
+                        </div>
+                        <div class="data_name">
+                            <span><%= username %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="per_file">
+                    <div class="file_title"><span>我的档案</span></div>
+                    <div class="file_body">
+                        <div class="file_in">
+                            <div class="component">
+                                <div class="basic_file">
+                                    <div class="basic_title">基本信息：</div>
+                                    <table class="per_table">
+                                        <tbody>
+                                            <% if (name) { %>
+                                                <tr><td class="tr_title">姓&nbsp;&nbsp;&nbsp;名：</td><td><%= name %></td></tr>
+                                            <% } %>
+                                            <% if (gender) { %>
+                                                <tr><td class="tr_title">性&nbsp;&nbsp;&nbsp;别：</td><td><%= gender %></td></tr>
+                                            <% } %>
+                                            <% if (birthdate) { %>
+                                                <tr><td class="tr_title">生&nbsp;&nbsp;&nbsp;日：</td><td><%= birthdate %></td></tr>
+                                            <% } %>
+                                            <% if (city) { %>
+                                                <tr><td class="tr_title">城&nbsp;&nbsp;&nbsp;市：</td><td><%= city %></td></tr>
+                                            <% } %>
+                                            <% if (marriage) { %>
+                                                <tr><td class="tr_title">婚&nbsp;&nbsp;&nbsp;姻：</td><td><%= marriage %></td></tr>
+                                            <% } %>
+                                            <% if (job) { %>
+                                                <tr><td class="tr_title">职&nbsp;&nbsp;&nbsp;业：</td><td><%= job %></td></tr>
+                                            <% } %>
+                                            <% if ( ! (name || gender || birthdate|| city|| marriage || job)) {%>
+                                                <tr><td>暂未添加。</td></tr>
+                                            <% }%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="basic_file">
+                                    <div class="basic_title">联系方式：</div>
+                                    <table class="contact_table">
+                                        <tbody>
+                                            <% if (email) { %>
+                                                <tr><td class="tr_title">邮&nbsp;&nbsp;&nbsp;箱：</td><td><%= email %></td></tr>
+                                            <% } %>
+                                            <% if (phone) { %>
+                                                <tr><td class="tr_title">手&nbsp;&nbsp;&nbsp;机：</td><td><%= phone %></td></tr>
+                                            <% } %>
+                                            <% if (qq) { %>
+                                                <tr><td class="tr_title">Q&nbsp;&nbsp;&nbsp;&nbsp;Q：</td><td><%= qq %></td></tr>
+                                            <% } %>
+                                            <% if ( ! (email || phone ||qq)) {%>
+                                                <tr><td>暂未添加。</td></tr>
+                                            <% }%>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,6 +100,5 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

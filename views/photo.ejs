@@ -14,9 +14,9 @@
                 <h4><a href=""><%= bloggername%>的博客</a></h4>
                 <div class="nav navbar-nav">
                     <li><a href="#">首页</a></li>
-                    <li><a href="http://localhost:3000/<%= blogger %>/bloglist">日志</a></li>
-                    <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
-                    <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/bloglist">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/about">关于我</a></li>
                 </div>
             </nav>
         </div>
@@ -71,7 +71,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">上传图片</h4>
             </div>
-            <form action="/<%= blogger%>/album/<%= albumname%>" method="post" id="photo_form" enctype="multipart/form-data">
+            <form action="/<%= blogname%>/album/<%= albumname%>" method="post" id="photo_form" enctype="multipart/form-data">
                 <div class="choose_pic upload_pic">
                     <button type="button" class="btn btn-default" id="choose_photo">选择图片</button>
                     <input type="file" id="file" name="file" multiple="multiple" class="hidden" onchange=getname()><br>

@@ -5,7 +5,12 @@ exports.form = function(req, res) {
     if(! req.session.uid) {
         res.redirect('/');
     } else {
-        res.render('modify', {});
+        User.findOneData('_id',req.session.uid,function(err, user) {
+            res.render('modify', {
+                blogname: user.user_account,
+                bloggername: user.user_username
+            });
+        })
     }
 }
 

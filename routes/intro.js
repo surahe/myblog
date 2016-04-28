@@ -14,7 +14,9 @@ exports.form = function(req, res) {
                     province: user.user_province,
                     city: user.user_city,
                     marriage: user.user_marriage,
-                    job: user.user_job
+                    job: user.user_job,
+                    blogname: user.user_account,
+                    bloggername: user.user_username
                 });
             }   else {
                 res.render('intro', {
@@ -26,7 +28,9 @@ exports.form = function(req, res) {
                     province: user.user_province,
                     city: user.user_city,
                     marriage: user.user_marriage,
-                    job: user.user_job
+                    job: user.user_job,
+                    blogname: user.user_account,
+                    bloggername: user.user_username
                 });
             }
         })

@@ -14,9 +14,9 @@
                 <h4><a href=""><%= bloggername%>的博客</a></h4>
                 <div class="nav navbar-nav">
                     <li><a href="">首页</a></li>
-                    <li><a href="http://localhost:3000/<%= blogger %>/bloglist">日志</a></li>
-                    <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
-                    <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/bloglist">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogname %>/about">关于我</a></li>
                 </div>
             </nav>
         </div>
@@ -31,7 +31,7 @@
                         <% for(var i = 0; i < album_name.length; i++) {%>
                         <li class="content-album">
                             <div class="content-album-cover">
-                                <a href="http://localhost:3000/<%= blogger %>/album/<%= album_name[i]%>">
+                                <a href="http://localhost:3000/<%= blogname %>/album/<%= album_name[i]%>">
                                     <% if (album_cover[i]) { %>
                                         <img class="album_cover" src="<%= "/images/album/" + userid + "/" + album_name[i]+"/small/"+ album_cover[i]%>">
                                         </img>
@@ -50,7 +50,7 @@
                                 <span><%= album_number[i]%></span>张
                             </div>
                             <div class="content-album-info">
-                                <a class="content-album-name" title="<%= album_name[i] %>" href="http://localhost:3000/<%= blogger %>/album/<%= album_name[i]%>"><%= album_name[i] %></a>
+                                <a class="content-album-name" title="<%= album_name[i] %>" href="http://localhost:3000/<%= blogname %>/album/<%= album_name[i]%>"><%= album_name[i] %></a>
                                 <span class="content-album-date"><%= album[i].album_time.getFullYear()%>-<%= album[i].album_time.getMonth()+1%>-<%= album[i].album_time.getDate()%>
                                 </span>
                             </div>

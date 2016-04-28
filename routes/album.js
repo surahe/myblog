@@ -21,7 +21,7 @@ exports.create = function(req, res) {
 
         res.render('album', {
             userid: user._id,
-            blogger: req.params.blogname,
+            blogname: req.params.blogname,
             album: user.user_album.splice(page.from,8),
             album_name: album_name_box,
             page_index: page.number,

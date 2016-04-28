@@ -8,7 +8,9 @@ exports.form = function(req, res) {
             res.render('contact', {
                 email: user.user_email,
                 phone: user.user_phone,
-                qq: user.user_qq
+                qq: user.user_qq,
+                blogname: user.user_account,
+                bloggername: user.user_username
             });
         })
     }

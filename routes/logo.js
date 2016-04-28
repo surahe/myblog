@@ -10,13 +10,21 @@ exports.form = function(req, res) {
         var logo;
         User.findById(req.session.uid, function(err, data) {
             if(data.user_logo) {
-                res.render('logo', {logo: data.user_logo})
+                res.render('logo', {
+                    logo: data.user_logo,
+                    blogname: data.user_account,
+                    bloggername: data.user_username
+                })
             }
             else {
-                fs.readFile('public/images/logo/' + req.session.uid + '.jpg', function(err,data){
+                fs.readFile('public/images/logo/' + req.session.uid + '.jpg', function(err,fs){
                     if(err){
                         logo = '/images/logo/default.jpg';
-                        res.render('logo', {logo: logo});
+                        res.render('logo', {
+                            logo: logo,
+                            blogname: data.user_account,
+                            bloggername: data.user_username
+                        });
                     }
                 })
             }

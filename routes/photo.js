@@ -27,7 +27,7 @@ exports.show = function(req,res) {
         fs.readdir('public/images/album/' + user._id + "/" + req.params.albumname, function(err, data){
             res.render('photo', {
                 files: data,
-                blogger: req.params.blogname,
+                blogname: req.params.blogname,
                 albumname:req.params.albumname,
                 userid: user._id,
                 picturename: picture_name_box,

@@ -27,6 +27,8 @@ var photo_page = require('./lib/middleware/photo_page');
 var about = require('./routes/about');
 var write = require('./routes/write')
 var blogList = require('./routes/blog_list')
+var blog = require('./routes/blog')
+
 
 var app = express();
 
@@ -92,5 +94,7 @@ app.get('/:blogname/bloglist/:tagnumber?',blogList.show)
 app.post('/createtag',blogList.create)
 app.post('/deletetag',blogList.del)
 app.post('/edittag',blogList.edit)
+
+app.get('/:blogname/blog/:blogid', blog.show)
 
 module.exports = app;

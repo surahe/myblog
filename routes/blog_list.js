@@ -12,38 +12,22 @@ exports.show = function(req, res){
     User.findOne({user_account:req.params.blogname}, function(err,user){
         //查询该博主的tag
         Tag.find({tag_user:user._id}, function(err, tag){
-            //将每个标签的日志数存储到tag_count
-            for(var i = 0; i<tag.length; i++) {
-                Blog.find({blog_tag:tag[i].tag_number,blog_user:user._id}, function(err, blog) {
-                    tag_count.push(blog.length)
-                    //完成后执行后面的操作
-                    if(tag_count.length == tag.length){
-                        //将所有日志的数量存储到blog_count
-                        Blog.find({blog_user:user._id}, function(err, blognumber){
-                            blog_count = blognumber.length;
-                            //将默认分类的日志数存储到df_count
-                            Blog.find({blog_user:user._id, blog_tag: "00"}, function(err, data){
-                                df_count = data.length
-                                //若blogtag undefined，访问所有日志
-                                if(!blogtag) {
-                                    Blog.find({blog_user:user._id}, function(err, all){
-                                        res.render('blog_list',{
-                                            tags: tag,
-                                            blogger: req.params.blogname,
-                                            bloggername: user.user_username,
-                                            blog_count: blog_count,
-                                            tag_count: tag_count,
-                                            df_count: df_count,
-                                            blog_list: all,
-                                            tag_name: "所有博客",
-                                            tag_number: blog_count
-                                        })
-                                    })
-                                }
-                                //否则显示该分类的日志
-                                else {
-                                    Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
-                                        Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
+            if(tag.length) {
+                //将每个标签的日志数存储到tag_count
+                for(var i = 0; i<tag.length; i++) {
+                    Blog.find({blog_tag:tag[i].tag_number,blog_user:user._id}, function(err, blog) {
+                        tag_count.push(blog.length)
+                        //完成后执行后面的操作
+                        if(tag_count.length == tag.length){
+                            //将所有日志的数量存储到blog_count
+                            Blog.find({blog_user:user._id}, function(err, blognumber){
+                                blog_count = blognumber.length;
+                                //将默认分类的日志数存储到df_count
+                                Blog.find({blog_user:user._id, blog_tag: "00"}, function(err, data){
+                                    df_count = data.length
+                                    //若blogtag undefined，访问所有日志
+                                    if(!blogtag) {
+                                        Blog.find({blog_user:user._id}, function(err, all){
                                             res.render('blog_list',{
                                                 tags: tag,
                                                 blogger: req.params.blogname,
@@ -51,16 +35,50 @@ exports.show = function(req, res){
                                                 blog_count: blog_count,
                                                 tag_count: tag_count,
                                                 df_count: df_count,
-                                                blog_list: part,
-                                                tag_name: nowtag.tag_name,
-                                                tag_number: part.length
+                                                blog_list: all,
+                                                tag_name: "所有博客",
+                                                tag_number: blog_count
                                             })
                                         })
-                                    })
-                                }
+                                    }
+                                    //否则显示该分类的日志
+                                    else {
+                                        Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
+                                            Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
+                                                res.render('blog_list',{
+                                                    tags: tag,
+                                                    blogger: req.params.blogname,
+                                                    bloggername: user.user_username,
+                                                    blog_count: blog_count,
+                                                    tag_count: tag_count,
+                                                    df_count: df_count,
+                                                    blog_list: part,
+                                                    tag_name: nowtag.tag_name,
+                                                    tag_number: part.length
+                                                })
+                                            })
+                                        })
+                                    }
+                                })
                             })
+                        }
+                    })
+                }
+            }
+            else{
+                User.findOne({user_account:req.params.blogname}, function(err,user) {
+                    Blog.find({blog_user:user._id, blog_tag:"00"}, function(err, defa){
+                        res.render('blog_list',{
+                            tags: [],
+                            blogger: req.params.blogname,
+                            bloggername: user.user_username,
+                            blog_count: defa.length,
+                            df_count: defa.length,
+                            tag_name: "默认分类",
+                            tag_number : defa.length,
+                            blog_list: defa
                         })
-                    }
+                    })
                 })
             }
         })
