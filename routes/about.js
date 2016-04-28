@@ -19,7 +19,6 @@ exports.display = function(req, res) {
 
         res.render('about', {
             blogname: req.params.blogname,
-            username: user.user_username,
             logo: user.user_logo,
             name: user.user_name,
             gender: gender,

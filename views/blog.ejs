@@ -9,7 +9,48 @@
 <body id="blog">
     <% include menu %>
     <div class="container">
-    <% include navbar %>
+        <% include navbar %>
+        <div class="row">
+            <div class="col-md-3 ">
+                <div class="per_data">
+                    <div class="data_head">
+                        <span>个人资料</span>
+                    </div>
+                    <div class="data_body">
+                        <div class="data_img">
+                            <% if (logo) { %>
+                            <img src="<%= logo %>">
+                            <% }else {%>
+                            <img src="/images/logo/default.jpg">
+                            <% }%>
+                        </div>
+                        <div class="data_name">
+                            <span><%= bloggername %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="text">
+                    <div class="text_head">
+                        <span>正文</span>
+                    </div>
+                    <div class="text_body">
+                        <div class="blog">
+                            <div class="blogTitle">
+                                <h2>offsetLeft与style.left的区别</h2>
+                                <span>(2014-08-18 00:57:25)</span>
+                            </div>
+                            <div class="blogTag">
+                                <span>分类：</span>
+                                <a href="" target="_blank"></a>
+                            </div>
+                            <div class="blogContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="/javascripts/jquery-1.11.1.js"></script>
     <script src="/javascripts/bootstrap.js"></script>

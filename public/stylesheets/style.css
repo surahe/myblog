@@ -12,6 +12,7 @@
         6.关于我
         7.写日志
         8.日志列表
+        9.日志正文
     -------------------
 
     COLOURS -----------
@@ -965,4 +966,21 @@
     line-height: 80px;
     font-weight: bold;
     font-size: 16px;
+}
+
+/* 9日志正文
+---------------------------------------------------------------------- */
+.text{
+    clear: both;
+    margin: 0;
+    text-align: left;
+    overflow: hidden;
+    width: auto;
+    height: 100%;
+}
+
+.text_head {
+    height: 30px;
+    line-height: 30px;
+    background-color: #f0f0f0;
 }
