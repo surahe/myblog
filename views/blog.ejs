@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><%- blog_title %></title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
@@ -36,17 +36,51 @@
                         <span>正文</span>
                     </div>
                     <div class="text_body">
+                        <!--正文开始-->
                         <div class="blog">
                             <div class="blogTitle">
-                                <h2>offsetLeft与style.left的区别</h2>
-                                <span>(2014-08-18 00:57:25)</span>
+                                <h2 class="titleName"><%- blog_title %></h2>
+                                <span class="titleTime"><%= blog_time.getFullYear() +"-"+ (blog_time.getMonth() + 1) +"-"+ blog_time.getDate() + " " + blog_time.getHours() + ":" + blog_time.getMinutes() %></span>
+                                <a href="">[编辑]</a>
+                                <a href="">[删除]</a>
                             </div>
                             <div class="blogTag">
                                 <span>分类：</span>
-                                <a href="" target="_blank"></a>
+                                <a href="" target="_blank">5</a>
                             </div>
-                            <div class="blogContent"></div>
+                            <div class="blogContent">
+                                <%- blog_content %>
+                            </div>
                         </div>
+                        <!--正文结束-->
+                        <!--评论开始-->
+                        <div class="comment">
+                            <div class="comm_title">
+                                <span>评论</span>
+                                <a href="#post">[发评论]</a>
+                            </div>
+                            <ul id="comment_list">
+                                <!--无评论-->
+                                <li>
+                                    <div class="noCommdate">
+                                        <span class="SG_txtb">尚未有评论</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a name="post"></a>
+                            <div class="write_commm">
+                                <div class="comm_title">
+                                    <span>发评论</span>
+                                </div>
+                                <div class="comm_form">
+                                    <textarea id="commentArea" rows="7" cols="50"></textarea>
+                                </div>
+                                <div class="comm_btn">
+                                    <a  class="btn btn-success" >发评论</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--评论结束-->
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ exports.show = function(req, res) {
             res.render('write',{
                 show_name: show_name,
                 show_number: show_number,
-                blogger: req.session.account
+                blogname: req.session.account
             })
         })
     } else{
