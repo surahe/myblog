@@ -41,7 +41,7 @@
                             <div class="blogTitle">
                                 <h2 class="titleName"><%- blog_title %></h2>
                                 <span class="titleTime"><%= blog_time.getFullYear() +"-"+ (blog_time.getMonth() + 1) +"-"+ blog_time.getDate() + " " + blog_time.getHours() + ":" + blog_time.getMinutes() %></span>
-                                <a href="">[编辑]</a>
+                                <a href="http://localhost:3000/blog_edit/<%= blog_id%>">[编辑]</a>
                                 <a href="">[删除]</a>
                             </div>
                             <div class="blogTag">

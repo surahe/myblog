@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑日志</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body id="edit">
+    <% include menu %>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar col-md-10 col-md-offset-1" id="nav">
+                <div class="nav navbar-nav">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/bloglist">日志</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
+                    <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="article clearfix">
+                <div class="article_title"><span>编辑日志</span></div>
+                <div class="col-md-12">
+                    <form action="/ueditor/ue" method="post">
+                        <div class="title_box"><span>标题： </span><input type="text" id="title" name="title" class="form-control"></div>
+                        <input type="hidden"  id="txt" name="txt">
+                        <script id="blog" name="blog" type="text/plain" style="height:500px;"></script>
+                        <div class="tag_box">
+                            <span>分类： </span>
+                            <select name="tag" id="tag">
+                                <option value="00">默认分类</option>
+                                <% if (show_name) {%>
+                                <% for(var i in show_name){ %>
+                                <option value=<%= show_number[i]%> > <%= show_name [i]%></option>
+                                <% } %>
+                                <% }%>
+                            </select>
+                        </div>
+                        <div class="post_blog_box"><button type="button" id="post_blog" class="btn btn-primary">提交</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/jquery-1.11.1.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"> </script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var editor = UE.getEditor('blog',{
+            toolbars: [
+                [
+                    'forecolor', //字体颜色
+                    'backcolor', //背景色
+                    'bold', //加粗
+                    'italic', //斜体
+                    'underline', //下划线
+
+                    'spechars', //特殊字符
+                    'subscript', //下标
+                    'superscript', //上标
+                    'horizontal', //分隔线
+                    'undo', //撤销
+                    'redo', //重做
+                    'indent', //首行缩进
+                    'rowspacingtop', //段前距
+                    'rowspacingbottom', //段后距
+                    'lineheight', //行间距
+                    'preview', //预览
+                ],
+                [
+                    'link', //超链接
+                    'anchor', //锚点
+                    'justifyleft', //居左对齐
+                    'justifyright', //居右对齐
+                    'justifycenter', //居中对齐
+                    'justifyjustify', //两端对齐
+                    'inserttable', //插入表格
+                    'insertorderedlist', //有序列表
+                    'insertunorderedlist', //无序列表
+                    'simpleupload', //单图上传
+                    'fontfamily', //字体
+                    'fontsize', //字号
+                    'paragraph', //段落格式
+                ]
+            ]
+        });
+    </script>
+</body>
+</html>

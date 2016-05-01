@@ -9,7 +9,8 @@ exports.show = function(req, res) {
                 logo: user.user_logo,
                 blog_content: blog.blog_content,
                 blog_title :blog.blog_title,
-                blog_time: blog.blog_time
+                blog_time: blog.blog_time,
+                blog_id: blog._id
             })
         })
     })
