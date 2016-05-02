@@ -13,9 +13,11 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <% include message %>
+                <% if (locals.user && locals.user.user_account == blogname) { %>
                 <div class="album_operation">
                     <a href=""  class="create_album" data-toggle="modal" data-target="#album_modal"></a>
                 </div>
+                <% }%>
                 <div class="alubm_list">
                     <ul>
                         <% for(var i = 0; i < album_name.length; i++) {%>
@@ -31,10 +33,12 @@
                                         </div>
                                     <% } %>
                                 </a>
+                                <% if (locals.user && locals.user.user_account == blogname) { %>
                                 <div class="content-album-del">
                                     <a class="modify" title="编辑" href="" data-toggle="modal" data-target="#album_edit_modal"></a>
                                     <a class="delete" title="删除" href="" data-toggle="modal" data-target="#album_del_modal"></a>
                                 </div>
+                                <% } %>
                             </div>
                             <div class="content-album-picture-total">
                                 <span><%= album_number[i]%></span>张

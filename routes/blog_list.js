@@ -42,19 +42,36 @@ exports.show = function(req, res){
                                     //否则显示该分类的日志
                                     else {
                                         Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
-                                            Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
-                                                res.render('blog_list',{
-                                                    tags: tag,
-                                                    blogger: req.params.blogname,
-                                                    bloggername: user.user_username,
-                                                    blog_count: blog_count,
-                                                    tag_count: tag_count,
-                                                    df_count: df_count,
-                                                    blog_list: part,
-                                                    tag_name: nowtag.tag_name,
-                                                    tag_number: part.length
+                                            if(!nowtag) {
+                                                Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
+                                                    res.render('blog_list',{
+                                                        tags: tag,
+                                                        blogger: req.params.blogname,
+                                                        bloggername: user.user_username,
+                                                        blog_count: blog_count,
+                                                        tag_count: tag_count,
+                                                        df_count: df_count,
+                                                        blog_list: part,
+                                                        tag_name: '默认分类',
+                                                        tag_number: part.length
+                                                    })
                                                 })
-                                            })
+                                            }
+                                            else {
+                                                Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
+                                                    res.render('blog_list',{
+                                                        tags: tag,
+                                                        blogger: req.params.blogname,
+                                                        bloggername: user.user_username,
+                                                        blog_count: blog_count,
+                                                        tag_count: tag_count,
+                                                        df_count: df_count,
+                                                        blog_list: part,
+                                                        tag_name: nowtag.tag_name,
+                                                        tag_number: part.length
+                                                    })
+                                                })
+                                            }
                                         })
                                     }
                                 })
@@ -159,6 +176,14 @@ exports.del = function(req, res){
 //编辑标签
 exports.edit = function(req, res) {
     Tag.findOneAndUpdate({tag_user:req.session.uid, tag_name:req.body.oldname},{tag_name:req.body.newname},{new:true},function(err, tag){
+        if(err){console.log(err)}
+        res.end()
+    })
+}
+
+//删除日志
+exports.del_blog = function(req, res) {
+    Blog.findByIdAndRemove(req.body.id,{new:true}, function(err,blog){
         if(err){console.log(err)}
         res.end()
     })

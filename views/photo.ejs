@@ -12,9 +12,11 @@
         <% include navbar %>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <% if (locals.user && locals.user.user_account == blogname) { %>
                 <div class="photo_operation">
                     <a href=""  class="upload_photo" data-toggle="modal" data-target="#upload_photo">上传图片</a>
                 </div>
+                <% }%>
                 <div class="photobody">
                     <ul class="photo_list">
                         <% if(picturename) {%>
@@ -29,7 +31,9 @@
                                     </div>
                                     <div >
                                         <div class="photo_titie" ><a href=""><%= picturename[i] %></a> </div>
+                                        <% if (locals.user && locals.user.user_account == blogname) { %>
                                         <a href="javascript:;" class="edit_tile" >[编辑]</a>
+                                        <% } %>
                                         <div class="edit_box" style="display: none;">
                                             <p class="edit_input">
                                                 <input class="photo_input"  id="" maxlength="30" name="new_title" value=<%= picturename[i] %>>
@@ -45,7 +49,9 @@
                                             </p>
                                         </div>
                                     </div>
+                                    <% if (locals.user && locals.user.user_account == blogname) { %>
                                     <p id=""><a href="" class="photo_function set_cover">设为封面</a> | <a href="" class="photo_function del_photo" data-toggle="modal" data-target="#photo_del_modal" >删除</a></p>
+                                    <% } %>
                                 </li>
                             <% } %>
                         <% } %>

@@ -15,7 +15,7 @@ exports.submit = function(req, res, next){
             if (user) {
                 req.session.uid = user.id;
                 req.session.account = user.user_account;
-                res.redirect('/login');
+                res.redirect('/u/' + user.user_account);
             } else {
                 res.error("账号或密码错误");
                 res.redirect('back');

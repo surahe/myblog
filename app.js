@@ -29,7 +29,7 @@ var write = require('./routes/write')
 var blogList = require('./routes/blog_list')
 var blog = require('./routes/blog')
 var edit = require('./routes/edit')
-
+var home = require('./routes/home')
 
 var app = express();
 
@@ -97,7 +97,8 @@ app.post('/edittag',blogList.edit)
 
 app.get('/:blogname/blog/:blogid', blog.show)
 app.get('/blog_edit/:blogid', edit.show)
-app.post('/blog_edit/:blogid', edit.submit)
+app.post('/deleteblog', blogList.del_blog)
 
+app.get('/u/:blogname', home.show)
 
 module.exports = app;

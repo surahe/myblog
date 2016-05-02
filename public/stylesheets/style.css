@@ -13,6 +13,7 @@
         7.写日志
         8.日志列表
         9.日志正文
+        10.首页
     -------------------
 
     COLOURS -----------
@@ -763,6 +764,8 @@
     background: -webkit-linear-gradient(top , rgb(255, 255, 255) , rgb(234, 234, 234) 100%);
     line-height: 34px;
     text-align: right;
+    float: left;
+    margin-right: 15px;
 }
 
 .write_link:hover {
@@ -778,6 +781,16 @@
     width:15px;
     height: 20px;
     background: url("../images/system/write.png") no-repeat;
+}
+
+.pto {
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    width: 20px;
+    height: 25px;
+    background: url("../images/system/photo.png") no-repeat;
 }
 
 .tag_list {
@@ -811,8 +824,7 @@
 
 .my_func {
     position: absolute;
-    left: 700px;
-    width: 200px;
+    width: 330px;
     top: 175px;
     left: 800px;
 }
@@ -1076,4 +1088,26 @@
 
 .comm_btn {
     text-align: center;
+}
+
+/* 10首页
+---------------------------------------------------------------------- */
+.home_list {
+    border: 1px solid #ccc;
+}
+
+.home_list_head {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    padding-left: 10px;
+    background-color: #f0f0f0;
+}
+
+.home_list_body {
+    padding: 0 20px 30px;
+}
+
+.summaryTitle {
+    padding: 20px 0;
 }

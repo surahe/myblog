@@ -58,7 +58,6 @@ exports.submit =  function(req, res, next) {
                         blog_user: user._id,
                         blog_time: Date.now()
                     })
-                    user.user_blog.push(new_blog)
                     new_blog.save()
                     user.save(function(err){if(err){console.log(err)}});
                     res.redirect('/login')

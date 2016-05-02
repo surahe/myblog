@@ -41,8 +41,10 @@
                             <div class="blogTitle">
                                 <h2 class="titleName"><%- blog_title %></h2>
                                 <span class="titleTime"><%= blog_time.getFullYear() +"-"+ (blog_time.getMonth() + 1) +"-"+ blog_time.getDate() + " " + blog_time.getHours() + ":" + blog_time.getMinutes() %></span>
+                                <% if (locals.user && locals.user.user_account == blogname) { %>
                                 <a href="http://localhost:3000/blog_edit/<%= blog_id%>">[编辑]</a>
-                                <a href="">[删除]</a>
+                                <a href="#" class="del_blog"  data-toggle="modal" data-target="#del_blog_model" id=<%= blog_id%>>[删除]</a>
+                                <% }%>
                             </div>
                             <div class="blogTag">
                                 <span>分类：</span>
@@ -86,7 +88,38 @@
             </div>
         </div>
     </div>
+    <!--删除日志开始-->
+    <div class="modal fade" id="del_blog_model">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body ">
+                    确实要删除此日志吗？删除后不可恢复。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary del_blog_con">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--删除日志结束-->
     <script src="/javascripts/jquery-1.11.1.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
+    <script>
+        var del_blog = "";
+        $(document).on('click','.del_blog',function(){
+            del_blog = $(this).attr('id')
+        })
+        $(document).on('click','.del_blog_con',function(){
+            console.log(del_blog)
+            $.post('/deleteblog',{id: del_blog},function(result){
+                window.location.replace('http://localhost:3000/'+<%= blogname%>'+ '/bloglist')
+            })
+        })
+    </script>
 </body>
 </html>

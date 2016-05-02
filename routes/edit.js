@@ -13,22 +13,20 @@ exports.show = function(req, res){
             }
         }
         Blog.findById(req.params.blogid,function(err, blog){
-            res.render('edit',{
-                show_name: show_name,
-                show_number: show_number,
-                blogger: req.session.account,
-                blog_title: blog.blog_title,
-                blog_content: blog.blog_content,
-                blog_tag: blog.blog_tag,
-                blog_id :blog.id
-            })
+            if(req.session.uid == blog.blog_user) {
+                res.render('edit',{
+                    show_name: show_name,
+                    show_number: show_number,
+                    blogger: req.session.account,
+                    blog_title: blog.blog_title,
+                    blog_content: blog.blog_content,
+                    blog_tag: blog.blog_tag,
+                    blog_id :blog.id
+                })
+            }
+            else{
+                res.redirect('back')
+            }
         })
     })
-}
-
-exports.submit = function(req, res) {
-    console.log(req.body.title)
-    console.log(req.body.blog)
-    console.log(req.body.txt)
-    console.log(req.body.tag)
 }

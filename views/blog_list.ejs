@@ -13,23 +13,28 @@
             <nav class="navbar col-md-10 col-md-offset-1" id="nav">
                 <h4><a href=""><%= bloggername%>的博客</a></h4>
                 <div class="nav navbar-nav">
-                    <li><a href="">首页</a></li>
+                    <li><a href="http://localhost:3000/u/<%= blogger %>">首页</a></li>
                     <li><a href="http://localhost:3000/<%= blogger %>/bloglist">日志</a></li>
                     <li><a href="http://localhost:3000/<%= blogger %>/album">相册</a></li>
                     <li><a href="http://localhost:3000/<%= blogger %>/about">关于我</a></li>
                 </div>
             </nav>
         </div>
+        <% if (locals.user) { %>
         <div class="my_func">
             <a href="../write" class="write_link"><em class="wte"></em>写日志</a>
+            <a href="./album" class="write_link"><em class="pto"></em>发图片</a>
         </div>
+        <% } %>
         <div class="row">
             <div class="col-md-2 col-md-offset-1">
                 <div class="tag_list">
                     <h4>分&nbsp;&nbsp;&nbsp;&nbsp;类</h4>
                     <ul>
+                        <% if (locals.user && locals.user.user_account == blogger) { %>
                         <li><a href="" data-toggle="modal" data-target="#tag_modal">[编辑分类]</a></li>
-                        <li><a href= http://localhost:3000/<%= blogger%>/bloglist >所有博客</a><em>(<%=blog_count %>)</em></li>
+                        <% } %>
+                        <li><a href= http://localhost:3000/<%= blogger%>/bloglist >所有日志</a><em>(<%=blog_count %>)</em></li>
                         <li><a href= http://localhost:3000/<%= blogger%>/bloglist/00 >默认分类</a><em>(<%= df_count %>)</em></li>
                         <% for(var i in tags) {%>
                             <li><a href= http://localhost:3000/<%= blogger%>/bloglist/<%=tags[i].tag_number %> > <%= tags[i].tag_name %></a><em>(<%=tag_count[i] %>)</em></li>
@@ -51,13 +56,15 @@
                                     <p class="blog_title"><a target="_blank" href="http://localhost:3000/<%= blogger %>/blog/<%= blog_list[i]._id%>"><%= blog_list[i].blog_title %></a></p>
                                     <p class="blog_info">
                                         <span class="blog_time"><%= blog_list[i].blog_time.getFullYear() +"-"+ (blog_list[i].blog_time.getMonth() + 1) +"-"+ blog_list[i].blog_time.getDate() + " " + blog_list[i].blog_time.getHours() + ":" + blog_list[i].blog_time.getMinutes() %></span>
-                                        <span class="blog_set"><a href="http://localhost:3000/blog_edit/<%= blog_list[i]._id%>">[编辑]</a><a href="" id="<%= blog_list[i]._id%>">[删除]</a></span>
+                                        <% if (locals.user && locals.user.user_account == blogger) { %>
+                                        <span class="blog_set"><a href="http://localhost:3000/blog_edit/<%= blog_list[i]._id%>">[编辑]</a><a href="#" class="del_blog" id="<%= blog_list[i]._id%>"  data-toggle="modal" data-target="#del_blog_model">[删除]</a></span>
+                                        <% } %>
                                     </p>
                                 </div>
                                 <% } %>
                             </div>
                             <% }else {%>
-                            <div class="blog_nodata">此分类暂无博文，你可以在发表博文和编辑博文的时候进行归类。</div>
+                            <div class="blog_nodata">此分类暂无日志，你可以在发表日志和编辑日志的时候进行归类。</div>
                             <% }%>
                         </div>
                     </div>
@@ -65,6 +72,7 @@
             </div>
         </div>
     </div>
+    <!--编辑分类开始-->
     <div class="modal fade" id="tag_modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -72,35 +80,37 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                     <h5 class="modal-title">编辑分类</h5>
                 </div>
-                    <div class="modal-body">
-                        <div class="create_tag">
-                            <input type="text" maxlength="28" placeholder="最多可输入14个中文字符" id="categoryName" class="form-control">
-                            <button type="button" class="cre_tag">创建分类</button>
-                            <div id="errTips"></div>
-                        </div>
-                        <div class="edit_del_tag">
-                            <ul class="clearfix">
-                                <% for(var i in tags){ %>
-                                <li>
-                                    <span class="htit"><%= tags[i].tag_name %></span>
-                                    <input type="hidden" value=<%= tags[i].tag_name %> name="typename[]" class="catName" maxlength="14">
-                                    <span class="control"><a href="#"class="edit_tag">[编辑]</a><a href="#" class="del_tag"  data-toggle="modal" data-target="#del_modal">[删除]</a></span>
-                                    <div  class="writeinfo">
-                                        <input  type="text" value="" class="form-control">
-                                        <a class="edit_con" href="#">确定</a>
-                                        <a class="edit_can" href="#">取消</a>
-                                        <div class="errTips"></div>
-                                    </div>
-                                </li>
-                                <% } %>
-                            </ul>
-                        </div>
+                <div class="modal-body">
+                    <div class="create_tag">
+                        <input type="text" maxlength="28" placeholder="最多可输入14个中文字符" id="categoryName" class="form-control">
+                        <button type="button" class="cre_tag">创建分类</button>
+                        <div id="errTips"></div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="edit_del_tag">
+                        <ul class="clearfix">
+                            <% for(var i in tags){ %>
+                            <li>
+                                <span class="htit"><%= tags[i].tag_name %></span>
+                                <input type="hidden" value=<%= tags[i].tag_name %> name="typename[]" class="catName" maxlength="14">
+                                <span class="control"><a href="#"class="edit_tag">[编辑]</a><a href="#" class="del_tag"  data-toggle="modal" data-target="#del_modal">[删除]</a></span>
+                                <div  class="writeinfo">
+                                    <input  type="text" value="" class="form-control">
+                                    <a class="edit_con" href="#">确定</a>
+                                    <a class="edit_can" href="#">取消</a>
+                                    <div class="errTips"></div>
+                                </div>
+                            </li>
+                            <% } %>
+                        </ul>
                     </div>
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>
+    <!--编辑分类结束-->
+    <!--删除分类开始-->
     <div class="modal fade" id="del_modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -118,6 +128,26 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <!--删除分类结束-->
+    <!--删除日志开始-->
+    <div class="modal fade" id="del_blog_model">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body ">
+                    确实要删除此日志吗？删除后不可恢复。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary del_blog_con">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--删除日志结束-->
     <script src="/javascripts/jquery-1.11.1.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
     <!--创建标签-->
@@ -181,8 +211,7 @@
             }
         })
     </script>
-
-    <!--删除-->
+    <!--删除标签-->
     <script>
         var del_tag = "";
         $(document).on('click','.del_tag',function(){
@@ -195,7 +224,19 @@
             })
         })
     </script>
-
+    <!--删除日志-->
+    <script>
+        var del_blog = "";
+        $(document).on('click','.del_blog',function(){
+            del_blog = $(this).attr('id')
+        })
+        $(document).on('click','.del_blog_con',function(){
+            console.log(del_blog)
+            $.post('/deleteblog',{id: del_blog},function(result){
+                window.location.reload()
+            })
+        })
+    </script>
     <!--关闭-->
     <script>
         $(document).on('hidden.bs.modal','#tag_modal', function () {

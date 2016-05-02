@@ -93,8 +93,7 @@ var userSchema = new Schema({
         }
     },
     user_album : [{ type: Schema.Types.ObjectId, ref: 'Album' }],
-    user_tag:[{ type: Schema.Types.ObjectId, ref: 'Tag' }],
-    user_blog : [{ type: Schema.Types.ObjectId, ref: 'Blog' }],
+    user_tag:[{ type: Schema.Types.ObjectId, ref: 'Tag' }]
 })
 
 userSchema.plugin(deepPopulate);
