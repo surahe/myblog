@@ -18,7 +18,7 @@ exports.show = function(req, res) {
             res.render('write',{
                 show_name: show_name,
                 show_number: show_number,
-                blogname: req.session.account
+                blogger: req.session.account
             })
         })
     } else{
@@ -46,36 +46,36 @@ exports.submit =  function(req, res, next) {
     }
 
     if(!req.query.action) {
-        User.findById(req.session.uid,function(err,user){
-            console.log(user)
-            var new_blog = new Blog({
-                blog_title: req.body.title,
-                blog_content: req.body.blog,
-                blog_summary: req.body.txt,
-                blog_tag: req.body.tag,
-                blog_user: user._id,
-                blog_time: Date.now() + (8 * 60 * 60 * 1000)
-            })
-            user.user_blog.push(new_blog)
-            new_blog.save()
-            user.save(function(err){if(err){console.log(err)}});
-            res.redirect('/login')
+        Blog.findById(req.body.id,function(err, blog){
+            if(! blog) {
+                User.findById(req.session.uid,function(err,user){
+                    var txt = req.body.txt.substr(0,150)
+                    var new_blog = new Blog({
+                        blog_title: req.body.title,
+                        blog_content: req.body.blog,
+                        blog_summary: txt,
+                        blog_tag: req.body.tag,
+                        blog_user: user._id,
+                        blog_time: Date.now()
+                    })
+                    user.user_blog.push(new_blog)
+                    new_blog.save()
+                    user.save(function(err){if(err){console.log(err)}});
+                    res.redirect('/login')
+                })
+            } else {
+                var txt = req.body.txt.substr(0,150)
+                blog.set({
+                    blog_title: req.body.title,
+                    blog_content: req.body.blog,
+                    blog_summary: txt,
+                    blog_tag : req.body.tag
+                })
+                blog.save()
+                User.findById(req.session.uid,function(err,user){
+                    res.redirect('http://localhost:3000/' + user.user_account + '/blog/' + req.body.id)
+                })
+            }
         })
     }
-}
-
-exports.getTag = function(req, res) {
-    Tag.find({tag_user:req.session.uid}, function(err,tag){
-        var tag_name_box = [];
-        var tag_number_box = [];
-        var get_tag
-        if(tag) {
-            for(var i = 0; i < tag.length; i++) {
-                tag_name_box.push(tag[i].tag_name)
-                tag_number_box.push(tag[i].tag_number)
-            }
-            get_tag = {tag_name:tag_name_box, tag_number:tag_number_box};
-            res.send(get_tag)
-        }
-    })
 }

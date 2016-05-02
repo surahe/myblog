@@ -44,7 +44,6 @@ exports.submit = function(req, res) {
         res.redirect('back')
         return false
     }
-    console.log(data.birthdate)
     User.findOneData("_id",req.session.uid, function(err, user) {
         user.set({
             user_name: data.name.trim(),

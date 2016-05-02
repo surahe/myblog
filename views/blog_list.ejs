@@ -51,7 +51,7 @@
                                     <p class="blog_title"><a target="_blank" href="http://localhost:3000/<%= blogger %>/blog/<%= blog_list[i]._id%>"><%= blog_list[i].blog_title %></a></p>
                                     <p class="blog_info">
                                         <span class="blog_time"><%= blog_list[i].blog_time.getFullYear() +"-"+ (blog_list[i].blog_time.getMonth() + 1) +"-"+ blog_list[i].blog_time.getDate() + " " + blog_list[i].blog_time.getHours() + ":" + blog_list[i].blog_time.getMinutes() %></span>
-                                        <span class="blog_set"><a href="http://localhost:3000/blog_edit/<%= blog_list[i]._id%>">[编辑]</a><a href="">[删除]</a></span>
+                                        <span class="blog_set"><a href="http://localhost:3000/blog_edit/<%= blog_list[i]._id%>">[编辑]</a><a href="" id="<%= blog_list[i]._id%>">[删除]</a></span>
                                     </p>
                                 </div>
                                 <% } %>

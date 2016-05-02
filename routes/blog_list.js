@@ -7,8 +7,6 @@ exports.show = function(req, res){
     var tag_count = [];                  //每个标签的日志数
     var blog_count = 0;                  //所有日志数
     var df_count = 0;                    //默认分类日志数
-    var now_tag = "";
-    var now_count = 0;
     User.findOne({user_account:req.params.blogname}, function(err,user){
         //查询该博主的tag
         Tag.find({tag_user:user._id}, function(err, tag){

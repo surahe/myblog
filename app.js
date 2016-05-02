@@ -89,7 +89,6 @@ app.get('/:blogname/about', about.display)
 
 app.get('/write',write.show)
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'),write.submit));
-app.get('/get_tag', write.getTag)
 
 app.get('/:blogname/bloglist/:tagnumber?',blogList.show)
 app.post('/createtag',blogList.create)
@@ -98,5 +97,7 @@ app.post('/edittag',blogList.edit)
 
 app.get('/:blogname/blog/:blogid', blog.show)
 app.get('/blog_edit/:blogid', edit.show)
+app.post('/blog_edit/:blogid', edit.submit)
+
 
 module.exports = app;

@@ -18,8 +18,17 @@ exports.show = function(req, res){
                 show_number: show_number,
                 blogger: req.session.account,
                 blog_title: blog.blog_title,
-                blog_content: blog.blog_content
+                blog_content: blog.blog_content,
+                blog_tag: blog.blog_tag,
+                blog_id :blog.id
             })
         })
     })
+}
+
+exports.submit = function(req, res) {
+    console.log(req.body.title)
+    console.log(req.body.blog)
+    console.log(req.body.txt)
+    console.log(req.body.tag)
 }
