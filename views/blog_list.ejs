@@ -34,10 +34,10 @@
                         <% if (locals.user && locals.user.user_account == blogger) { %>
                         <li><a href="" data-toggle="modal" data-target="#tag_modal">[编辑分类]</a></li>
                         <% } %>
-                        <li><a href= http://localhost:3000/<%= blogger%>/bloglist >所有日志</a><em>(<%=blog_count %>)</em></li>
+                        <li><a href= http://localhost:3000/<%= blogger%>/bloglist >所有日志</a><em>(<%=all_number %>)</em></li>
                         <li><a href= http://localhost:3000/<%= blogger%>/bloglist/00 >默认分类</a><em>(<%= df_count %>)</em></li>
                         <% for(var i in tags) {%>
-                            <li><a href= http://localhost:3000/<%= blogger%>/bloglist/<%=tags[i].tag_number %> > <%= tags[i].tag_name %></a><em>(<%=tag_count[i] %>)</em></li>
+                            <li><a href= http://localhost:3000/<%= blogger%>/bloglist/<%=tags[i].tag_number %> > <%= tags[i].tag_name %></a><em>(<%=tag_number[i].tag_amount %>)</em></li>
                         <% }%>
                     </ul>
                 </div>
@@ -45,7 +45,7 @@
             <div class="col-md-8">
                 <div class="blog_list">
                     <div class="blog_list_head">
-                        <span><%= tag_name %><em>(<%= tag_number%>)</em></span>
+                        <span><%= tag_name %><em>(<%= blog_count%>)</em></span>
                     </div>
                     <div class="blog_list_body">
                         <div class="blog_list_blk">

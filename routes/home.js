@@ -14,6 +14,7 @@ exports.show = function(req, res){
                         tag_box.push(tag.tag_name);
                     }
                     if(tag_box.length == blog.length) {
+                        console.log(tag_box)
                         res.render('home',{
                             blog: blog,
                             bloggername: user.user_username,

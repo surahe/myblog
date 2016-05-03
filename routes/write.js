@@ -49,18 +49,22 @@ exports.submit =  function(req, res, next) {
         Blog.findById(req.body.id,function(err, blog){
             if(! blog) {
                 User.findById(req.session.uid,function(err,user){
-                    var txt = req.body.txt.substr(0,150)
-                    var new_blog = new Blog({
-                        blog_title: req.body.title,
-                        blog_content: req.body.blog,
-                        blog_summary: txt,
-                        blog_tag: req.body.tag,
-                        blog_user: user._id,
-                        blog_time: Date.now()
+                    Tag.findOne({tag_user:req.session.uid, tag_number:req.body.tag}, function(err, tag){
+                        tag.tag_amount++;
+                        tag.save()
+                        var txt = req.body.txt.substr(0,150)
+                        var new_blog = new Blog({
+                            blog_title: req.body.title,
+                            blog_content: req.body.blog,
+                            blog_summary: txt,
+                            blog_tag: req.body.tag,
+                            blog_user: user._id,
+                            blog_time: Date.now(),
+                        })
+                        new_blog.save()
+                        user.save(function(err){if(err){console.log(err)}});
+                        res.redirect('/login')
                     })
-                    new_blog.save()
-                    user.save(function(err){if(err){console.log(err)}});
-                    res.redirect('/login')
                 })
             } else {
                 var txt = req.body.txt.substr(0,150)
