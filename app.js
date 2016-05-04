@@ -30,6 +30,7 @@ var blogList = require('./routes/blog_list')
 var blog = require('./routes/blog')
 var edit = require('./routes/edit')
 var home = require('./routes/home')
+var blog_list_page = require('./lib/middleware/blog_list_page');
 
 var app = express();
 
@@ -90,7 +91,7 @@ app.get('/:blogname/about', about.display)
 app.get('/write',write.show)
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'),write.submit));
 
-app.get('/:blogname/bloglist/:tagnumber?',blogList.show)
+app.get('/:blogname/bloglist/:tagnumber?',blog_list_page,blogList.show)
 app.post('/createtag',blogList.create)
 app.post('/deletetag',blogList.del)
 app.post('/edittag',blogList.edit)
@@ -98,7 +99,9 @@ app.post('/edittag',blogList.edit)
 app.get('/:blogname/blog/:blogid', blog.show)
 app.get('/blog_edit/:blogid', edit.show)
 app.post('/deleteblog', blogList.del_blog)
+app.post('/message', blog.post)
 
-app.get('/u/:blogname', home.show)
+
+app.get('/u/:blogname',blog_list_page, home.show)
 
 module.exports = app;

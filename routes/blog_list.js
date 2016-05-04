@@ -4,6 +4,7 @@ var Blog = require('../models/blog')
 
 exports.show = function(req, res){
     var blogtag = req.params.tagnumber; //当前页面的标签编号
+    var page = req.page;
     User.findOne({user_account:req.params.blogname}, function(err,user){
         //查询该博主的tag
         Tag.find({tag_user:user._id}, function(err, tag){
@@ -14,7 +15,7 @@ exports.show = function(req, res){
                         Blog.find({blog_user:user._id, blog_tag: "00"}, function(err, data){
                             //若blogtag undefined，访问所有日志
                             if(!blogtag) {
-                                Blog.find({blog_user:user._id}, function(err, all){
+                                Blog.find({blog_user:user._id},null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, all){
                                     res.render('blog_list',{
                                         tags: tag,
                                         blogger: req.params.blogname,
@@ -30,7 +31,7 @@ exports.show = function(req, res){
                             //否则显示该分类的日志
                             else {
                                 Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
-                                    Tag.find({tag_user:user._id},'tag_amount -_id', function(err, tag_amo) {
+                                    Tag.find({tag_user:user._id},'tag_amount -_id',null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, tag_amo) {
                                         Blog.find({blog_user:user._id, blog_tag:nowtag._id}, function(err, part){
                                             res.render('blog_list',{
                                                 tags: tag,
@@ -52,7 +53,7 @@ exports.show = function(req, res){
             }
             else{
                 User.findOne({user_account:req.params.blogname}, function(err,user) {
-                    Blog.find({blog_user:user._id, blog_tag:"00"}, function(err, defa){
+                    Blog.find({blog_user:user._id, blog_tag:"00"},null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, defa){
                         res.render('blog_list',{
                             tags: [],
                             blogger: req.params.blogname,

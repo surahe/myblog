@@ -1,6 +1,8 @@
 var User = require('../models/user');
 var Blog = require('../models/blog');
 var Tag = require('../models/tag');
+var Message = require('../models/message');
+
 exports.show = function(req, res) {
     User.findOne({user_account: req.params.blogname}, function(err, user){
         Blog.findById(req.params.blogid, function(err, blog){
@@ -19,4 +21,17 @@ exports.show = function(req, res) {
             })
         })
     })
+}
+
+exports.post = function(req, res) {
+    var msg = new Message({
+        message_user: req.session.uid,
+        message_content: req.body.message,
+        message_time: Date.now(),
+        message_blog: req.body.blogid,
+    })
+    msg.save(function(err){
+        console.log(err)
+    })
+    res.end()
 }

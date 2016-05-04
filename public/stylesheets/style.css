@@ -14,6 +14,7 @@
         8.日志列表
         9.日志正文
         10.首页
+        11.补充
     -------------------
 
     COLOURS -----------
@@ -322,9 +323,7 @@
     margin-bottom: 20px;
     list-style: none;
     float: left;
-    background: #fff;
-    border: 1px solid #b5b5b5;
-    border-bottom: 1px solid #6b6b6b;
+    border: 1px solid #ccc;
     box-shadow: 0 1px 1px #e5e5e5;
     position: relative;
     overflow: hidden;
@@ -463,7 +462,7 @@
     margin-right: 9px;
     background: white;
     padding: 0 18px;
-    border: 1px solid #b5b5b5;
+    border: 1px solid #ccc;
     text-decoration: none;
 }
 
@@ -613,7 +612,7 @@
 ---------------------------------------------------------------------- */
 .per_data,.per_file {
     padding:3px;
-    border: 1px solid #d6d6d6;
+    border: 1px solid #ccc;
 }
 
 .data_head,.file_title {
@@ -667,6 +666,7 @@
     line-height: 32px;
     font-size: 16px;
     font-weight: 700;
+    color: #666666
 }
 
 .basic_file table tr {
@@ -804,7 +804,7 @@
     font-size: 16px;
     text-align: center;
     border-bottom: 1px solid #ccc;
-    background-color: #dbdbdb;
+    background-color: #f0f0f0;
 }
 
 .tag_list ul {
@@ -838,7 +838,7 @@
     line-height: 30px;
     font-size: 16px;
     padding-left: 10px;
-    background-color: #dbdbdb;
+    background-color: #f0f0f0;
 }
 
 .blog_list_head em {
@@ -887,7 +887,7 @@
     font-size: 14px;
     clear: both;
     padding-top: 65px;
-    padding-bottom: 130px;
+    padding-bottom: 30px;
     text-align: center;
 }
 
@@ -1110,4 +1110,17 @@
 
 .summaryTitle {
     padding: 20px 0;
+}
+
+
+/* 11补充
+---------------------------------------------------------------------- */
+#blog_list #pager,#home #pager {
+    margin: 20px auto 0 auto;
+}
+
+.nologin{
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
 }

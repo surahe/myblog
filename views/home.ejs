@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
-<body id="hone">
+<body id="home">
     <% include menu %>
     <div class="container">
         <% include navbar %>
@@ -35,14 +35,15 @@
                     <span>日志</span>
                 </div>
                 <div class="home_list_body">
-                    <div class="summary_list">
-                        <% for(var i = blog.length-1; i >= 0; i--) { %>
+                    <% if(blog.length) { %>
+                        <div class="summary_list">
+                            <% for(var i = blog.length-1; i >= 0; i--) { %>
                             <div class="summaryTitle" >
                                 <h2 class="titleName"><a href="http://localhost:3000/<%= blogname%>/blog/<%= blog[i]._id%>"><%= blog[i].blog_title %></a></h2>
                                 <span class="titleTime"><%= blog[i].blog_time.getFullYear() + '-' +  (blog[i].blog_time.getMonth() + 1) + '-' + blog[i].blog_time.getDate() + ' ' + blog[i].blog_time.getHours() + ":" + (blog[i].blog_time.getMinutes()>10? blog[i].blog_time.getMinutes() : '0'+ blog[i].blog_time.getMinutes()) %></span>
                                 <% if (locals.user && locals.user.user_account == blogname) { %>
-                                    <a href="http://localhost:3000/blog_edit/<%= blog[i]._id %>">[编辑]</a>
-                                    <a href="#" class="del_blog" data-toggle="modal" data-target="#del_blog_model" id="<%= blog[i]._id %>">[删除]</a>
+                                <a href="http://localhost:3000/blog_edit/<%= blog[i]._id %>">[编辑]</a>
+                                <a href="#" class="del_blog" data-toggle="modal" data-target="#del_blog_model" id="<%= blog[i]._id %>">[删除]</a>
                                 <% } %>
                             </div>
                             <div class="blogTag">
@@ -52,8 +53,12 @@
                                     <%= blog[i].blog_summary%>
                                 </div>
                             </div>
-                        <% } %>
-                    </div>
+                            <% } %>
+                        </div>
+                    <% } else {%>
+                        <div class="blog_nodata">此分类暂无日志</div>
+                    <% } %>
+                    <% include page %>
                 </div>
             </div>
         </div>

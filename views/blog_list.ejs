@@ -50,7 +50,7 @@
                         <div class="blog_list_blk">
                             <% if(blog_list.length) {%>
                             <div class="blog_box">
-                                <% for(var i =  blog_list.length -1 ; i >= 0; i--) {%>
+                                <% for(var i = 0 ; i <blog_list.length ; i++) {%>
                                 <div class="blog_cell">
                                     <p class="blog_title"><a target="_blank" href="http://localhost:3000/<%= blogger %>/blog/<%= blog_list[i]._id%>"><%= blog_list[i].blog_title %></a></p>
                                     <p class="blog_info">
@@ -61,9 +61,10 @@
                                     </p>
                                 </div>
                                 <% } %>
+                                <% include page%>
                             </div>
                             <% }else {%>
-                            <div class="blog_nodata">此分类暂无日志，你可以在发表日志和编辑日志的时候进行归类。</div>
+                            <div class="blog_nodata">此分类暂无日志</div>
                             <% }%>
                         </div>
                     </div>
