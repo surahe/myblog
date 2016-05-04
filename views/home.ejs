@@ -39,7 +39,7 @@
                         <% for(var i = blog.length-1; i >= 0; i--) { %>
                             <div class="summaryTitle" >
                                 <h2 class="titleName"><a href="http://localhost:3000/<%= blogname%>/blog/<%= blog[i]._id%>"><%= blog[i].blog_title %></a></h2>
-                                <span class="titleTime"><%= blog[i].blog_time.getFullYear() + '-' +  (blog[i].blog_time.getMonth() + 1) + '-' + blog[i].blog_time.getDate() + ' ' + blog[i].blog_time.getHours() + ":" + blog[i].blog_time.getMinutes() %></span>
+                                <span class="titleTime"><%= blog[i].blog_time.getFullYear() + '-' +  (blog[i].blog_time.getMonth() + 1) + '-' + blog[i].blog_time.getDate() + ' ' + blog[i].blog_time.getHours() + ":" + (blog[i].blog_time.getMinutes()>10? blog[i].blog_time.getMinutes() : '0'+ blog[i].blog_time.getMinutes()) %></span>
                                 <% if (locals.user && locals.user.user_account == blogname) { %>
                                     <a href="http://localhost:3000/blog_edit/<%= blog[i]._id %>">[编辑]</a>
                                     <a href="#" class="del_blog" data-toggle="modal" data-target="#del_blog_model" id="<%= blog[i]._id %>">[删除]</a>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="blogTag">
                                 <span>分类：</span>
-                                <a href="http://localhost:3000/<%= blogname%>/bloglist/<%=blog[i].blog_tag %>"><%= tag_box[i] %></a>
+                                <a href="http://localhost:3000/<%= blogname%>/bloglist/<%=blog[i].blog_tag.tag_number %>"><%= blog[i].blog_tag.tag_name %></a>
                                 <div class="blogContent">
                                     <%= blog[i].blog_summary%>
                                 </div>

@@ -4,8 +4,6 @@ var Blog = require('../models/blog')
 
 exports.show = function(req, res){
     var blogtag = req.params.tagnumber; //当前页面的标签编号
-    var blog_count = 0;                  //所有日志数
-    var df_count = 0;                    //默认分类日志数
     User.findOne({user_account:req.params.blogname}, function(err,user){
         //查询该博主的tag
         Tag.find({tag_user:user._id}, function(err, tag){
@@ -14,7 +12,6 @@ exports.show = function(req, res){
                     Blog.find({blog_user:user._id}, function(err, blognumber){
                         //将默认分类的日志数存储到df_count
                         Blog.find({blog_user:user._id, blog_tag: "00"}, function(err, data){
-                            df_count = data.length
                             //若blogtag undefined，访问所有日志
                             if(!blogtag) {
                                 Blog.find({blog_user:user._id}, function(err, all){
@@ -23,7 +20,6 @@ exports.show = function(req, res){
                                         blogger: req.params.blogname,
                                         bloggername: user.user_username,
                                         blog_count: blognumber.length,
-                                        df_count: df_count,
                                         blog_list: all,
                                         tag_name: "所有日志",
                                         tag_number: tag_amo,
@@ -35,36 +31,18 @@ exports.show = function(req, res){
                             else {
                                 Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
                                     Tag.find({tag_user:user._id},'tag_amount -_id', function(err, tag_amo) {
-                                        if(!nowtag) {
-                                            Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
-                                                res.render('blog_list',{
-                                                    tags: tag,
-                                                    blogger: req.params.blogname,
-                                                    bloggername: user.user_username,
-                                                    blog_count: part.length,
-                                                    df_count: df_count,
-                                                    blog_list: part,
-                                                    tag_name: '默认分类',
-                                                    tag_number: tag_amo,
-                                                    all_number: blognumber.length
-                                                })
+                                        Blog.find({blog_user:user._id, blog_tag:nowtag._id}, function(err, part){
+                                            res.render('blog_list',{
+                                                tags: tag,
+                                                blogger: req.params.blogname,
+                                                bloggername: user.user_username,
+                                                blog_count: part.length,
+                                                blog_list: part,
+                                                tag_name: nowtag.tag_name,
+                                                tag_number: tag_amo,
+                                                all_number: blognumber.length
                                             })
-                                        }
-                                        else {
-                                            Blog.find({blog_user:user._id, blog_tag:blogtag}, function(err, part){
-                                                res.render('blog_list',{
-                                                    tags: tag,
-                                                    blogger: req.params.blogname,
-                                                    bloggername: user.user_username,
-                                                    blog_count: part.length,
-                                                    df_count: df_count,
-                                                    blog_list: part,
-                                                    tag_name: nowtag.tag_name,
-                                                    tag_number: tag_amo,
-                                                    all_number: blognumber.length
-                                                })
-                                            })
-                                        }
+                                        })
                                     })
                                 })
                             }
@@ -75,7 +53,6 @@ exports.show = function(req, res){
             else{
                 User.findOne({user_account:req.params.blogname}, function(err,user) {
                     Blog.find({blog_user:user._id, blog_tag:"00"}, function(err, defa){
-                        console.log(defa.length)
                         res.render('blog_list',{
                             tags: [],
                             blogger: req.params.blogname,
@@ -149,7 +126,6 @@ exports.create = function(req,res){
         }
         new_tag.save(function(err) {console.log(err)})
         User.findById(req.session.uid,function(err, user){
-            user.user_tag.push(new_tag._id);
             user.save(function(err) {console.log(err)})
             res.end()
         })
@@ -159,13 +135,23 @@ exports.create = function(req,res){
 
 //删除标签
 exports.del = function(req, res){
-    Tag.findOneAndRemove({tag_user:req.session.uid, tag_name:req.body.name},function(err,tag){
-        if(err){console.log(err)}
-        User.findByIdAndUpdate(req.session.uid, { $pull:{ user_tag: tag._id } },{new:true} ,function(err,data){
-            if(err){console.log(err)}
-            res.end()
-        });
+    //被删除的分类
+    Tag.findOne({tag_user:req.session.uid, tag_name:req.body.name}, function(err, tag){
+        //查询默认分类
+        Tag.findOne({tag_user:req.session.uid, tag_number:'00'}, function(err, def) {
+            //将日志的分类设置为默认分类的id
+            Blog.update({blog_tag:tag._id},{$set:{blog_tag:def._id}},{ multi: true },function(err3, blog){
+                //删除分类，默认分类增加数量
+                Tag.findOneAndRemove({tag_user:req.session.uid, tag_name:req.body.name},function(err,tag){
+                    def.tag_amount = def.tag_amount + blog.n;
+                    def.save()
+                    if(err){console.log(err)}
+                    res.end()
+                })
+            } )
+        })
     })
+
 }
 
 
@@ -181,7 +167,7 @@ exports.edit = function(req, res) {
 exports.del_blog = function(req, res) {
     Blog.findByIdAndRemove(req.body.id, function(err,blog){
         if(err){console.log(err)}
-        Tag.findOne({tag_user:req.session.uid, tag_number: blog.blog_tag}, function(err, tag){
+        Tag.findById(blog.blog_tag, function(err, tag){
             tag.tag_amount--;
             tag.save()
             res.end()

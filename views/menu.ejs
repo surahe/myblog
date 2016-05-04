@@ -9,7 +9,7 @@
             <% }%>
         </div>
         <div class="username">
-            <%= user.user_username %>
+            <a href="http://localhost:3000/u/<%= user.user_account%>"><%= user.user_username %></a>
         </div>
         <div class="logout">
             <a href='/logout'>注销</a>

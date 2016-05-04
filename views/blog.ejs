@@ -115,9 +115,8 @@
             del_blog = $(this).attr('id')
         })
         $(document).on('click','.del_blog_con',function(){
-            console.log(del_blog)
             $.post('/deleteblog',{id: del_blog},function(result){
-                window.location.replace('http://localhost:3000/'+<%= blogname%>'+ '/bloglist')
+                window.location.replace('http://localhost:3000/'+'<%= blogname%>'+ '/bloglist')
             })
         })
     </script>

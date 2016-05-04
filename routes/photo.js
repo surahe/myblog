@@ -103,7 +103,7 @@ exports.submit = function(req, res) {
             }
         }
     })
-    res.end('hehe');
+    res.end();
 }
 
 exports.edit = function(req, res) {

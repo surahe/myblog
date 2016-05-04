@@ -1,4 +1,5 @@
-var User = require('../lib/user')
+var User = require('../lib/user');
+var Tag = require('../models/tag');
 exports.form = function(req, res){
     res.render('register', {});
 };
@@ -35,7 +36,6 @@ exports.submit = function(req, res, next) {
                             user_identity: 0,
                             user_logo:""
                         });
-
                         user.save(function(err){
                             if(err) {
                                 for(keys in err.errors) {
@@ -45,10 +45,16 @@ exports.submit = function(req, res, next) {
                                 res.error(o.message);
                                 res.redirect('back')
                             }
-
                             //req.session.uid = user.id;
                             else{
-                                res.redirect('/');
+                                var tag = new Tag({
+                                    "tag_user" : user._id,
+                                    "tag_name" : "默认分类",
+                                    "tag_number" : "00",
+                                    "tag_amount" : 0,
+                                })
+                                tag.save()
+                                res.redirect('/login');
                             }
                         })
                     }

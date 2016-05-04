@@ -35,7 +35,7 @@ exports.submit =  function(req, res, next) {
         //console.log(foo.encoding); // 7bit
         //console.log(foo.mimetype); // image/png
         // 下面填写你要把图片保存到的路径 （ 以 path.join(__dirname, 'public') 作为根路径）
-        var img_url = 'images/blog/' + req.session.uid ;
+        var img_url = 'images/blog/' + req.session.uid;
         res.ue_up(img_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
     }
     // 客户端发起其它请求
@@ -47,6 +47,7 @@ exports.submit =  function(req, res, next) {
 
     if(!req.query.action) {
         Blog.findById(req.body.id,function(err, blog){
+            //新日志
             if(! blog) {
                 User.findById(req.session.uid,function(err,user){
                     Tag.findOne({tag_user:req.session.uid, tag_number:req.body.tag}, function(err, tag){
@@ -57,24 +58,32 @@ exports.submit =  function(req, res, next) {
                             blog_title: req.body.title,
                             blog_content: req.body.blog,
                             blog_summary: txt,
-                            blog_tag: req.body.tag,
+                            blog_tag: tag._id,
                             blog_user: user._id,
                             blog_time: Date.now(),
                         })
                         new_blog.save()
                         user.save(function(err){if(err){console.log(err)}});
-                        res.redirect('/login')
+                        res.redirect('http://localhost:3000/' + user.user_account + '/bloglist/')
                     })
                 })
             } else {
-                var txt = req.body.txt.substr(0,150)
-                blog.set({
-                    blog_title: req.body.title,
-                    blog_content: req.body.blog,
-                    blog_summary: txt,
-                    blog_tag : req.body.tag
+                var txt = req.body.txt.substr(0,150);
+                Tag.findById(blog.blog_tag, function(err, old){
+                    old.tag_amount --;
+                    old.save()
+                    Tag.findOne({tag_user:req.session.uid, tag_number:req.body.tag}, function(err, tag) {
+                        tag.tag_amount++;
+                        blog.set({
+                            blog_title: req.body.title,
+                            blog_content: req.body.blog,
+                            blog_summary: txt,
+                            blog_tag: tag._id
+                        })
+                        tag.save()
+                        blog.save()
+                    })
                 })
-                blog.save()
                 User.findById(req.session.uid,function(err,user){
                     res.redirect('http://localhost:3000/' + user.user_account + '/blog/' + req.body.id)
                 })
