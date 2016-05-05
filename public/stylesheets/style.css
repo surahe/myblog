@@ -442,7 +442,7 @@
 #pager {
     width: 205px;
     height:36px;
-    margin: 30px auto;
+    margin: 20px auto;
     position: relative;
 }
 
@@ -1029,6 +1029,10 @@
     color: #666666;
 }
 
+.blogTag {
+    border-bottom: 1px dotted #d3d3d3;
+}
+
 .blogTag span {
     color: #666666;
 }
@@ -1040,7 +1044,7 @@
 .blogContent {
     padding-top: 18px;
     padding-bottom: 50px;
-    border-bottom: 1px dotted #b3b7b3;
+    overflow: hidden;
 }
 
 /*评论开始*/
@@ -1120,7 +1124,48 @@
 }
 
 .nologin{
-    height: 50px;
-    line-height: 50px;
+    height: 100px;
+    line-height: 100px;
     text-align: center;
+}
+
+#comment_list {
+    padding-left: 0;
+}
+
+#comment_list li {
+    overflow: hidden;
+    padding: 20px 0 20px;
+    border-bottom: 1px dotted #b3b7b3;
+    list-style: none;
+}
+#comment_list li:last-child{
+    border:none;
+}
+
+.msg{
+    margin: 0 20px;
+}
+
+.msgTime{
+    font-family: Arial;
+    font-size: 12px;
+    color: #666666;
+}
+
+.msgContent{
+    line-height: 22px;
+    clear: both;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 9px;
+    word-break: break-all;
+}
+
+.myReFrom{
+    padding-top: 10px;
+}
+
+.msg_del {
+    float: right;
 }

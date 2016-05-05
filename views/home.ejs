@@ -37,7 +37,7 @@
                 <div class="home_list_body">
                     <% if(blog.length) { %>
                         <div class="summary_list">
-                            <% for(var i = blog.length-1; i >= 0; i--) { %>
+                            <% for(var i = 0; i < blog.length; i++) { %>
                             <div class="summaryTitle" >
                                 <h2 class="titleName"><a href="http://localhost:3000/<%= blogname%>/blog/<%= blog[i]._id%>"><%= blog[i].blog_title %></a></h2>
                                 <span class="titleTime"><%= blog[i].blog_time.getFullYear() + '-' +  (blog[i].blog_time.getMonth() + 1) + '-' + blog[i].blog_time.getDate() + ' ' + blog[i].blog_time.getHours() + ":" + (blog[i].blog_time.getMinutes()>10? blog[i].blog_time.getMinutes() : '0'+ blog[i].blog_time.getMinutes()) %></span>

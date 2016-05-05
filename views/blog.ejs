@@ -63,12 +63,30 @@
                             </div>
                             <ul id="comment_list">
                                 <!--无评论-->
-                                <li>
-                                    <div class="noCommdate">
-                                        <span class="SG_txtb">尚未有评论</span>
-                                    </div>
-                                </li>
+                                <% if(blog_msg.length) {%>
+                                    <% for(var i = 0; i < blog_msg.length; i++ ) {%>
+                                        <li id="<%= blog_msg[i]._id%>">
+                                            <div class="msg">
+                                                <div class="msgUser"><a href="http://localhost:3000/u/<%= blog_msg[i].message_user.user_account %>"><%= blog_msg[i].message_user.user_username %></a></div>
+                                                <div class="msgContent"><%= blog_msg[i].message_content %></div>
+                                                <div class="myReFrom">
+                                                    <span class="msgTime"><%= blog_msg[i].message_time.getFullYear() +"-"+ (blog_msg[i].message_time.getMonth() + 1) +"-"+ blog_msg[i].message_time.getDate() + " " + blog_msg[i].message_time.getHours() + ":" + (blog_msg[i].message_time.getMinutes()>10 ? blog_msg[i].message_time.getMinutes() : "0"+ blog_msg[i].message_time.getMinutes()) %></span>
+                                                    <% if (locals.user && (locals.user.user_account == blogname || locals.user.user_account == blog_msg[i].message_user.user_account) ) { %>
+                                                    <span class="msg_del"><a href="#" class="del_msg"  data-toggle="modal" data-target="#del_msg_model" id="<%= blog_msg[i]._id%>">[删除]</a></span>
+                                                    <% }%>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <% }%>
+                                <% } else {%>
+                                    <li>
+                                        <div class="noCommdate">
+                                            <span class="SG_txtb">尚未有评论</span>
+                                        </div>
+                                    </li>
+                                <% }%>
                             </ul>
+                            <% include page%>
                             <a name="post"></a>
                             <% if(locals.user) {%>
                                 <div class="write_commm">
@@ -111,6 +129,25 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!--删除日志结束-->
+    <!--删除留言开始-->
+    <div class="modal fade" id="del_msg_model">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body ">
+                    确实要删除此留言吗？删除后不可恢复。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary del_msg_con">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--删除留言结束-->
     <script src="/javascripts/jquery-1.11.1.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
     <!--删除日志-->
@@ -136,6 +173,18 @@
                     window.location.replace('http://localhost:3000/'+'<%= blogname%>'+ '/blog/' + '<%= blog_id%>')
                 })
             }
+        })
+    </script>
+    <!--删除留言-->
+    <script>
+        var del_msg = "";
+        $(document).on('click','.del_msg',function(){
+            del_msg = $(this).attr('id')
+        })
+        $(document).on('click','.del_msg_con',function(){
+            $.post('/del_msg',{id: del_msg},function(result){
+                window.location.replace('http://localhost:3000/'+'<%= blogname%>'+ '/blog/' + '<%= blog_id%>')
+            })
         })
     </script>
 </body>
