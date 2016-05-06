@@ -7,67 +7,50 @@ exports.show = function(req, res){
     var page = req.page;
     User.findOne({user_account:req.params.blogname}, function(err,user){
         //查询该博主的tag
-        Tag.find({tag_user:user._id}, function(err, tag){
-            if(tag.length) {
-                Tag.find({tag_user:user._id},'tag_amount -_id', function(err, tag_amo){
-                    Blog.find({blog_user:user._id}, function(err, blognumber){
-                        //将默认分类的日志数存储到df_count
-                        Blog.find({blog_user:user._id, blog_tag: "00"}, function(err, data){
-                            //若blogtag undefined，访问所有日志
-                            if(!blogtag) {
-                                Blog.find({blog_user:user._id},null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, all){
-                                    res.render('blog_list',{
-                                        tags: tag,
-                                        blogger: req.params.blogname,
-                                        bloggername: user.user_username,
-                                        blog_count: blognumber.length,
-                                        blog_list: all,
-                                        tag_name: "所有日志",
-                                        tag_number: tag_amo,
-                                        all_number: blognumber.length
-                                    })
+        Tag.find({tag_user:user._id},null,{sort:{_id:1}}, function(err, tag){
+            Tag.find({tag_user:user._id},'tag_amount -_id', function(err, tag_amo){
+                Blog.find({blog_user:user._id}, function(err, blognumber){
+                    //将默认分类的日志数存储到df_count
+                    Blog.find({blog_user:user._id, blog_tag: "00"}, function(err, data){
+                        //若blogtag undefined，访问所有日志
+                        if(!blogtag) {
+                            Blog.find({blog_user:user._id},null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, all){
+                                res.render('blog_list',{
+                                    tags: tag,
+                                    blogger: req.params.blogname,
+                                    bloggername: user.user_username,
+                                    blog_count: blognumber.length,
+                                    blog_list: all,
+                                    tag_name: "所有日志",
+                                    tag_number: tag_amo,
+                                    all_number: blognumber.length,
+                                    style: user.user_style
                                 })
-                            }
-                            //否则显示该分类的日志
-                            else {
-                                Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
-                                    Tag.find({tag_user:user._id},'tag_amount -_id',{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, tag_amo) {
-                                        Blog.find({blog_user:user._id, blog_tag:nowtag._id}, function(err, part){
-                                            res.render('blog_list',{
-                                                tags: tag,
-                                                blogger: req.params.blogname,
-                                                bloggername: user.user_username,
-                                                blog_count: part.length,
-                                                blog_list: part,
-                                                tag_name: nowtag.tag_name,
-                                                tag_number: tag_amo,
-                                                all_number: blognumber.length
-                                            })
+                            })
+                        }
+                        //否则显示该分类的日志
+                        else {
+                            Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
+                                Tag.find({tag_user:user._id},'tag_amount -_id',{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, tag_amo) {
+                                    Blog.find({blog_user:user._id, blog_tag:nowtag._id}, function(err, part){
+                                        res.render('blog_list',{
+                                            tags: tag,
+                                            blogger: req.params.blogname,
+                                            bloggername: user.user_username,
+                                            blog_count: part.length,
+                                            blog_list: part,
+                                            tag_name: nowtag.tag_name,
+                                            tag_number: tag_amo,
+                                            all_number: blognumber.length,
+                                            style: user.user_style
                                         })
                                     })
                                 })
-                            }
-                        })
+                            })
+                        }
                     })
                 })
-            }
-            else{
-                User.findOne({user_account:req.params.blogname}, function(err,user) {
-                    Blog.find({blog_user:user._id, blog_tag:"00"},null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, defa){
-                        res.render('blog_list',{
-                            tags: [],
-                            blogger: req.params.blogname,
-                            bloggername: user.user_username,
-                            blog_count: defa.length,
-                            df_count: defa.length,
-                            tag_name: "默认分类",
-                            tag_number : defa.length,
-                            blog_list: defa,
-                            all_number: defa.length
-                        })
-                    })
-                })
-            }
+            })
         })
     })
 }

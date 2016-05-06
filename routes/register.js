@@ -34,7 +34,8 @@ exports.submit = function(req, res, next) {
                             user_salt:salt,
                             user_username:data.username,
                             user_identity: 0,
-                            user_logo:""
+                            user_logo:"",
+                            user_style: 'default'
                         });
                         user.save(function(err){
                             if(err) {

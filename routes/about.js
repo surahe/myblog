@@ -29,7 +29,8 @@ exports.display = function(req, res) {
             email: user.user_email,
             phone: user.user_phone,
             qq: user.user_qq,
-            bloggername: user.user_username
+            bloggername: user.user_username,
+            style: user.user_style
         })
     })
 }

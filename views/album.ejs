@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title><%= bloggername %>相册</title>
-    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/blue_style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/style.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css" title="blue" disabled>
+    <link rel="stylesheet" href="/stylesheets/red_style.css" title="red" disabled>
+    <link rel="stylesheet" href="/stylesheets/pink_style.css" title="pink" disabled>
 </head>
 <body id="album">
     <% include menu %>
@@ -56,6 +58,8 @@
             </div>
         </div>
     </div>
+    <% include page %>
+    <% include footer%>
     <!-- 创建相册 -->
     <div class="modal fade" id="album_modal" tabindex="-1">
         <div class="modal-dialog">
@@ -122,7 +126,6 @@
             </div>
         </div>
     </div>
-    <% include page %>
     <script src="/javascripts/jquery-1.11.1.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
     <script>
@@ -154,6 +157,15 @@
             $('#album_del_index').attr('value',$(this).parent().parent().parent().index() + index * 8)
             console.log($('#del_name').attr('value'),$('#album_del_index').attr('value') )
         })
+    </script>
+    <!--显示配色-->
+    <script>
+        if('<%=style%>' != "default") {
+            $("link[title][title!='default']").attr('disabled', true);
+            $("link[title ='<%=style%>']").attr('disabled', false);
+        } else {
+            $("link[title][title!='default']").attr('disabled', true);
+        }
     </script>
 </body>
 </html>

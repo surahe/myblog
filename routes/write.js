@@ -6,19 +6,22 @@ var Blog = require('../models/blog')
 
 exports.show = function(req, res) {
     if(req.session.uid) {
-        Tag.find({tag_user:req.session.uid}, function(err, tag){
-            var show_name = [];
-            var show_number = []
-            if(tag) {
-                for(var i = 0; i < tag.length; i++) {
-                    show_name[i] = tag[i].tag_name,
-                    show_number[i] = tag[i].tag_number
+        User.findById(req.session.uid, function(err, user) {
+            Tag.find({tag_user: req.session.uid}, function (err, tag) {
+                var show_name = [];
+                var show_number = []
+                if (tag) {
+                    for (var i = 0; i < tag.length; i++) {
+                        show_name[i] = tag[i].tag_name,
+                            show_number[i] = tag[i].tag_number
+                    }
                 }
-            }
-            res.render('write',{
-                show_name: show_name,
-                show_number: show_number,
-                blogger: req.session.account
+                res.render('write', {
+                    show_name: show_name,
+                    show_number: show_number,
+                    blogger: req.session.account,
+                    style: user.user_style
+                })
             })
         })
     } else{

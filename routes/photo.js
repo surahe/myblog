@@ -34,7 +34,8 @@ exports.show = function(req,res) {
                 picturetype: picture_type_box,
                 pictureid: picture_id_box,
                 page_index: page.number,
-                bloggername: user.user_username
+                bloggername: user.user_username,
+                style: user.user_style
             });
         });
     })

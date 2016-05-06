@@ -14,7 +14,8 @@
         8.日志列表
         9.日志正文
         10.首页
-        11.补充
+        11.配色风格
+        12.补充
     -------------------
 
     COLOURS -----------
@@ -177,8 +178,13 @@
 
 }
 
-#set .container .row  .save {
-    margin-left: 150px;
+.save {
+    text-align: center;
+}
+
+.save button {
+    width: 100px;
+    height: 50px;
 }
 
 #set .container .row  #personal-data #birthday span select{
@@ -447,6 +453,11 @@
     height:36px;
     margin: 20px auto;
     position: relative;
+}
+
+#pager a:hover {
+    background: rgb(245, 248, 251);
+    color: #000000;
 }
 
 #prev {
@@ -854,7 +865,7 @@
 }
 
 .blog_list_blk {
-    padding: 12px 21px 40px;
+    padding: 12px 21px 20px;
 }
 
 .blog_box {
@@ -1121,8 +1132,38 @@
     padding: 20px 0;
 }
 
+/* 11配色风格
+---------------------------------------------------------------------- */
+.style_list {
+    margin-top: 20px;
+}
 
-/* 11补充
+.style_list ul{
+    padding: 0;
+    text-align: center;
+}
+
+.style_list li{
+    list-style: none;
+    margin-right: 40px;
+    float: left;
+}
+
+.style_list li a{
+    display: block;
+    padding: 2px;
+    border: 2px solid transparent;
+}
+
+.style_list li a:hover {
+    border-color: #00bb00;
+}
+
+.style_list .selected a{
+    border-color: #00bb00;
+}
+
+/* 12补充
 ---------------------------------------------------------------------- */
 #blog_list #pager,#home #pager {
     margin: 20px auto 0 auto;
@@ -1178,3 +1219,15 @@
 .modal-body.center{
     text-align: center;
 }
+
+.modal-header {
+    border-radius: 5px 5px  0px 0px;
+}
+
+.footer {
+    margin-top: 20px;
+    padding: 32px 0;
+    text-align: center;
+    background: #f0f0f0;
+}
+

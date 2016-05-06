@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>设置</title>
-    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/blue_style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/style.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css" title="blue" disabled>
+    <link rel="stylesheet" href="/stylesheets/red_style.css" title="red" disabled>
+    <link rel="stylesheet" href="/stylesheets/pink_style.css" title="pink" disabled>
 </head>
 <body id="set">
 <% include menu %>
@@ -18,6 +20,7 @@
                 <li class="active"><a href="/set/modify">修改密码</a></li>
                 <li><a href="/set/intro">个人资料</a></li>
                 <li><a href="/set/contact">联系方式</a></li>
+                <li><a href="/set/style">配色方案</a></li>
             </ul>
             <form action="/set/modify" class="form-horizontal" method="post">
                 <div class="tab-content">
@@ -50,8 +53,17 @@
         </div>
     </div>
 </div>
-
+<% include footer%>
 <script src="/javascripts/jquery-1.11.1.js"></script>
 <script src="/javascripts/bootstrap.js"></script>
+<!--显示配色-->
+<script>
+    if('<%=style%>' != "default") {
+        $("link[title][title!='default']").attr('disabled', true);
+        $("link[title ='<%=style%>']").attr('disabled', false);
+    } else {
+        $("link[title][title!='default']").attr('disabled', true);
+    }
+</script>
 </body>
 </html>

@@ -5,7 +5,7 @@ var gm = require('gm')
 
 exports.form = function(req, res) {
     if( ! req.session.uid) {
-        res.redirect('/')
+        res.redirect('/login')
     } else {
         var logo;
         User.findById(req.session.uid, function(err, data) {
@@ -13,7 +13,8 @@ exports.form = function(req, res) {
                 res.render('logo', {
                     logo: data.user_logo,
                     blogname: data.user_account,
-                    bloggername: data.user_username
+                    bloggername: data.user_username,
+                    style: data.user_style
                 })
             }
             else {
@@ -23,7 +24,8 @@ exports.form = function(req, res) {
                         res.render('logo', {
                             logo: logo,
                             blogname: data.user_account,
-                            bloggername: data.user_username
+                            bloggername: data.user_username,
+                            style: data.user_style
                         });
                     }
                 })

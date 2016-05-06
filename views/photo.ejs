@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title><%=albumname%>的照片</title>
-    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/blue_style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/style.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css" title="blue" disabled>
+    <link rel="stylesheet" href="/stylesheets/red_style.css" title="red" disabled>
+    <link rel="stylesheet" href="/stylesheets/pink_style.css" title="pink" disabled>
 </head>
 <body id="photo">
 <% include menu %>
@@ -62,6 +64,7 @@
             </div>
         </div>
     </div>
+<% include footer%>
 <div class="modal fade" id="upload_photo" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -209,6 +212,15 @@
             }
         })
     })
+</script>
+<!--显示配色-->
+<script>
+    if('<%=style%>' != "default") {
+        $("link[title][title!='default']").attr('disabled', true);
+        $("link[title ='<%=style%>']").attr('disabled', false);
+    } else {
+        $("link[title][title!='default']").attr('disabled', true);
+    }
 </script>
 </body>
 </html>

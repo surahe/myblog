@@ -3,12 +3,13 @@ var bcryptjs = require('bcryptjs');
 
 exports.form = function(req, res) {
     if(! req.session.uid) {
-        res.redirect('/');
+        res.redirect('/login');
     } else {
         User.findOneData('_id',req.session.uid,function(err, user) {
             res.render('modify', {
                 blogname: user.user_account,
-                bloggername: user.user_username
+                bloggername: user.user_username,
+                style: user.user_style
             });
         })
     }

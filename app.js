@@ -32,6 +32,7 @@ var edit = require('./routes/edit')
 var home = require('./routes/home')
 var blog_list_page = require('./lib/middleware/blog_list_page');
 var message_page = require('./lib/middleware/message_page');
+var style = require('./routes/style')
 
 var app = express();
 
@@ -104,5 +105,8 @@ app.post('/message', blog.post)
 app.post('/del_msg', blog.del_msg)
 
 app.get('/u/:blogname',blog_list_page, home.show)
+
+app.get('/set/style', style.form)
+app.post('/setstyle', style.submit)
 
 module.exports = app;

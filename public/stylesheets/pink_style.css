@@ -2,20 +2,29 @@
 #menu, .data_head,.home_list_head,.file_title,.create_album,.article_title,.upload_photo
 ,.text_head,.blog_list_head,.tag_list h4,.comm_title
 ,.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
-,#pager a:hover,#pager a:focus,#pager a :active,.footer,.modal-header
+,#pager a:hover,#pager a:focus,#pager a :active,.footer,.modal-header,.save button,.post_blog_box button
+,.modal-footer .btn-primary
 {
-    background: #04b1cc;
+    background: #e9869a;
 }
 
 /*浅色背景色*/
 .nav > li > a:hover, .nav > li > a:focus,.write_link:hover
 ,.modal-body button,.content-album-picture-total
 {
-    background: rgba(107, 189, 255, 0.91);
+    background: rgba(255, 172, 176, 0.91);
 }
 
-#logo #preview,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,body {
-    background: rgba(165, 224, 255, 0.16);
+.save button:hover,.save button:active,.save button:focus
+,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active
+,.modal-footer .btn-primary:hover,.modal-footer .btn-primary:focus,.modal-footer .btn-primary:active
+{
+    background: #ca6c72;
+}
+
+#logo #preview,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,body
+{
+    background: rgba(219, 32, 31, 0.18);
 }
 
 /*字体*/
@@ -25,14 +34,14 @@
 ,.blog_cell a,.tag_list li a,.modal-body,.content-album-name,#album form label,.desc
 ,#pager a
 {
-    color:#04b1cc
+    color: #e26a7c
 }
 
 /*深色字体*/
 .choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active
 ,.modal-body a,.tag_list ul em,.content-album-date,.photo_list li a,#ablut .basic_title
 {
-    color: #649eee
+    color: #9c0a0e
 }
 
 /*边框色*/
@@ -42,9 +51,10 @@
 , #preview-pane div,.choose_pic button,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,.my_func a
 ,.tag_list,.tag_list h4,.blog_list,.modal-header,.modal-footer,.modal-body input,.modal-body button
 ,.article,.alubm_list .content-album,.create_album,.create_album,.photobody,.photo_border p,.text,#commentArea
-,#pager a
+,#pager a,.save button,.post_blog_box button,.save button:hover,.save button:active,.save button:focus
+,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active
 {
-    border-color:#04b1cc
+    border-color: #f4b3c2
 }
 
 /*下边框透明*/
@@ -62,17 +72,17 @@
 }
 
 #nav .navbar-nav li:nth-child(1), #nav .navbar-nav li:nth-child(3),.my_func a {
-    background: -webkit-linear-gradient(top , rgb(101, 204, 204), rgb(21, 172, 204) 100%);
-    border-right: 1px solid #0094d0;
+    background: -webkit-linear-gradient(top , rgb(233, 134, 154), rgb(255, 172, 176) 100%);
+    border-right: 1px solid #ffacb0;
 }
 
 #nav .navbar-nav li:nth-child(2), #nav .navbar-nav li:nth-child(4) {
-    background: -webkit-linear-gradient(top , rgb(115, 178, 204), rgb(89, 166, 204) 100%);
-    border-right: 1px solid #0094d0;
+    background: -webkit-linear-gradient(top , rgb(248, 145, 145), rgb(255, 138, 149) 100%);
+    border-right: 1px solid #f89191;
 }
 
 #nav .navbar-nav li a:hover,.create_album:hover,.create_album:active,.create_album:focus
 ,.upload_photo:hover,.upload_photo:active,.upload_photo:focus
 {
-    background: -webkit-linear-gradient(top , rgb(23, 238, 235), rgb(35, 189, 232) 100%);
+    background: -webkit-linear-gradient(top , rgb(255, 183, 180), rgb(255, 148, 151) 100%);
 }

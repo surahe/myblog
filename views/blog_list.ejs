@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title><%= bloggername%>的博客</title>
-    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/blue_style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/style.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css" title="blue" disabled>
+    <link rel="stylesheet" href="/stylesheets/red_style.css" title="red" disabled>
+    <link rel="stylesheet" href="/stylesheets/pink_style.css" title="pink" disabled>
 </head>
 <body id="blog_list">
     <% include menu %>
@@ -37,7 +39,7 @@
                         <% } %>
                         <li><a href= http://localhost:3000/<%= blogger%>/bloglist >所有日志</a><em>(<%=all_number %>)</em></li>
                         <% for(var i in tags) {%>
-                            <li><a href= http://localhost:3000/<%= blogger%>/bloglist/<%=tags[i].tag_number %> > <%= tags[i].tag_name %></a><em>(<%=tag_number[i].tag_amount %>)</em></li>
+                            <li><a href= http://localhost:3000/<%= blogger%>/bloglist/<%=tags[i].tag_number %> > <%= tags[i].tag_name %></a><em>(<%=tags[i].tag_amount %>)</em></li>
                         <% }%>
                     </ul>
                 </div>
@@ -62,7 +64,17 @@
                                     </p>
                                 </div>
                                 <% } %>
-                                <% include page%>
+                                <div id='pager'>
+                                    <% if (page.count > 1) { %>
+                                        <% if (page.number >1 ) { %>
+                                            <a id='prev' href='?page=<%= page.number-1 %>'>上一页</a>
+                                        <% } %>
+                                        <% if (page.number < page.count ) { %>
+                                            <a id='next' href='?page=<%= page.number + 1 %>'>下一页</a>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+
                             </div>
                             <% }else {%>
                             <div class="blog_nodata">此分类暂无日志</div>
@@ -73,6 +85,7 @@
             </div>
         </div>
     </div>
+    <% include footer%>
     <!--编辑分类开始-->
     <div class="modal fade" id="tag_modal" tabindex="-1">
         <div class="modal-dialog">
@@ -250,6 +263,15 @@
             $('.control').show();
             $('.form-control').show().val('')
         })
+    </script>
+    <!--显示配色-->
+    <script>
+        if('<%=style%>' != "default") {
+            $("link[title][title!='default']").attr('disabled', true);
+            $("link[title ='<%=style%>']").attr('disabled', false);
+        } else {
+            $("link[title][title!='default']").attr('disabled', true);
+        }
     </script>
 </body>
 </html>

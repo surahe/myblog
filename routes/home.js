@@ -10,7 +10,8 @@ exports.show = function(req, res){
                 blog: blog,
                 bloggername: user.user_username,
                 blogname: req.params.blogname,
-                logo: user.user_logo
+                logo: user.user_logo,
+                style: user.user_style
             })
         })
     })

@@ -2,7 +2,7 @@ var User = require('../lib/user');
 
 exports.form = function(req, res) {
     if(! req.session.uid) {
-        res.redirect('/');
+        res.redirect('/login');
     } else {
         User.findOneData('_id',req.session.uid,function(err, user){
             res.render('contact', {
@@ -10,7 +10,8 @@ exports.form = function(req, res) {
                 phone: user.user_phone,
                 qq: user.user_qq,
                 blogname: user.user_account,
-                bloggername: user.user_username
+                bloggername: user.user_username,
+                style: user.user_style
             });
         })
     }

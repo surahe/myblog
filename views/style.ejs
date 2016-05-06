@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人风格</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/style.css" title="default">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css" title="blue" disabled>
+    <link rel="stylesheet" href="/stylesheets/red_style.css" title="red" disabled>
+    <link rel="stylesheet" href="/stylesheets/pink_style.css" title="pink" disabled>
+</head>
+<body id="style">
+<% include menu %>
+<div class="container">
+    <% include navbar %>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <ul class="nav nav-tabs">
+                <li><a href="/set/logo">上传头像</a></li>
+                <li><a href="/set/modify">修改密码</a></li>
+                <li><a href="/set/intro">个人资料</a></li>
+                <li><a href="/set/contact">联系方式</a></li>
+                <li class="active"><a href="/set/style">配色方案</a></li>
+            </ul>
+            <div class="style_list">
+                <ul class="clearfix">
+                    <li class="">
+                        <a href="javascript:;" class="style"><img src="/images/system/default.jpg" alt="默认风格" title="default"></a>
+                        <p>默认风格</p>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;" class="style"> <img src="/images/system/blue.jpg" alt="蓝色风格" title="blue"></a>
+                        <p>蓝色风格</p>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;" class="style"> <img src="/images/system/red.jpg" alt="红色风格" title="red"></a>
+                        <p>红色风格</p>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;" class="style"> <img src="/images/system/pink.jpg" alt="粉色风格" title="pink"></a>
+                        <p>粉色风格</p>
+                    </li>
+                </ul>
+                <div class="save">
+                    <button type="submit" class="btn btn-primary" id="savestyle">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer%>
+<script src="/javascripts/jquery-1.11.1.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<!--显示配色-->
+<script>
+    if('<%=style%>' != "default") {
+        $("link[title][title!='default']").attr('disabled', true);
+        $("link[title ='<%=style%>']").attr('disabled', false);
+    } else {
+        $("link[title][title!='default']").attr('disabled', true);
+    }
+</script>
+<script>
+    $('.style').click(function(){
+        var tit = $(this).children().attr('title');
+        $(this).parent().parent().children().removeClass();
+        $(this).parent().addClass('selected');
+        if($(this).children().attr('title') ==  'default') {
+            $("link[title]").attr("disabled",true);
+            $("link[title='default']").attr("disabled",false);
+        }
+        else {
+            $("link[title !='default']").attr("disabled",true);
+            $("link[title=" + tit+"]").attr("disabled",false);
+        }
+    })
+    $('#savestyle').click(function(){
+        $('.style_list').children('ul').children().each(function(){
+            if($(this).attr('class') == 'selected'){
+                $.post('/setstyle',{
+                    style: $('.style_list').children('ul').children('.selected').children('a').children().attr('title')
+                }, function(result){
+                    window.location.replace('http://localhost:3000/u/<%= blogname%>')
+                })
+            }
+        })
+    })
+</script>
+</body>
+</html>

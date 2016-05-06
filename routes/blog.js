@@ -20,7 +20,8 @@ exports.show = function(req, res) {
                         blog_id: blog._id,
                         blog_tag:  tag.tag_number,
                         blog_tagName: tag.tag_name,
-                        blog_msg: msg
+                        blog_msg: msg,
+                        style: user.user_style
                     })
                 })
             })
