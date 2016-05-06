@@ -92,7 +92,8 @@ var userSchema = new Schema({
             message: '请输入正确的邮箱地址'
         }
     },
-    user_album : [{ type: Schema.Types.ObjectId, ref: 'Album' }]
+    user_album : [{ type: Schema.Types.ObjectId, ref: 'Album' }],
+    user_style:{type: String}
 })
 
 userSchema.plugin(deepPopulate);

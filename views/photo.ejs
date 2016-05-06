@@ -5,6 +5,7 @@
     <title><%=albumname%>的照片</title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css">
 </head>
 <body id="photo">
 <% include menu %>
@@ -18,6 +19,7 @@
                 </div>
                 <% }%>
                 <div class="photobody">
+                    <div class="data_head"><span><%=albumname%></span></div>
                     <ul class="photo_list">
                         <% if(picturename) {%>
                             <% for(var i = 0; i < picturename.length; i++) {%>
@@ -29,7 +31,7 @@
                                             </a>
                                         </p>
                                     </div>
-                                    <div >
+                                    <div class="photo_info">
                                         <div class="photo_titie" ><a href=""><%= picturename[i] %></a> </div>
                                         <% if (locals.user && locals.user.user_account == blogname) { %>
                                         <a href="javascript:;" class="edit_tile" >[编辑]</a>
@@ -50,7 +52,7 @@
                                         </div>
                                     </div>
                                     <% if (locals.user && locals.user.user_account == blogname) { %>
-                                    <p id=""><a href="" class="photo_function set_cover">设为封面</a> | <a href="" class="photo_function del_photo" data-toggle="modal" data-target="#photo_del_modal" >删除</a></p>
+                                    <p><a href="" class="photo_function set_cover">设为封面</a> | <a href="" class="photo_function del_photo" data-toggle="modal" data-target="#photo_del_modal" >删除</a></p>
                                     <% } %>
                                 </li>
                             <% } %>

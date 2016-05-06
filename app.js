@@ -97,7 +97,7 @@ app.post('/createtag',blogList.create)
 app.post('/deletetag',blogList.del)
 app.post('/edittag',blogList.edit)
 
-app.get('/:blogname/blog/:blogid',message_page ,blog.show)
+app.get('/:blogname/blog/:blogid',message_page, blog.show)
 app.get('/blog_edit/:blogid', edit.show)
 app.post('/deleteblog', blogList.del_blog)
 app.post('/message', blog.post)

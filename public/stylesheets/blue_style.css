@@ -1,0 +1,76 @@
+/*背景色*/
+#menu, .data_head,.home_list_head,.file_title,.create_album,.article_title,.upload_photo
+,.text_head,.blog_list_head,.tag_list h4,.comm_title
+,.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
+{
+    background: #04b1cc;
+}
+
+/*浅色背景色*/
+.nav > li > a:hover, .nav > li > a:focus,.write_link:hover
+,.modal-body button,.content-album-picture-total
+{
+    background: rgba(107, 189, 255, 0.91);
+}
+
+#logo #preview,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,body {
+    background: rgba(165, 224, 255, 0.16);
+}
+
+/*字体*/
+.navbar  h4 a,.summary_list a,.data_name span
+,#pager a
+,.nav-tabs > li > a,.form-group label,#logo .desc,.choose_pic button,.basic_file table tr .tr_title
+,.blog_cell a,.tag_list li a,.modal-header,.modal-body,.content-album-name,#album form label,.desc
+{
+    color:#04b1cc
+}
+
+/*深色字体*/
+.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,.basic_title,.close,.close:hover, .close:focus
+,.modal-body a,.tag_list ul em,.content-album-date,.photo_list li a
+{
+    color: #649eee
+}
+
+/*边框色*/
+.per_data, .per_file ,.home_list
+,#pager a
+,.nav-tabs, .nav-tabs > li.active > a   , .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,.form-group input, .form-group select,#logo #preview
+, #preview-pane div,.choose_pic button,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,.my_func a
+,.tag_list,.tag_list h4,.blog_list,.modal-header,.modal-footer,.modal-body input,.modal-body button
+,.article,.alubm_list .content-album,.create_album,.create_album,.photobody,.photo_border p,.text,#commentArea
+{
+    border-color:#04b1cc
+}
+
+/*下边框透明*/
+.nav-tabs > li.active > a   , .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    border-bottom-color: transparent;
+}
+
+#menu a,#nav .navbar-nav a,.data_head span,.home_list_head span
+,.nav > li > a:hover, .nav > li > a:focus,.file_title span,.my_func a
+,.tag_list h4,.blog_list_head span,.modal-body button,.create_album,.create_album:hover,.create_album:active,.create_album:focus,.article_title span
+,.upload_photo,.upload_photo:hover,.upload_photo:active,.upload_photo:focus,.text_head span,.comm_title span,.comm_title a
+,.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
+
+{
+    color: #fff;
+}
+
+#nav .navbar-nav li:nth-child(1), #nav .navbar-nav li:nth-child(3),.my_func a {
+    background: -webkit-linear-gradient(top , rgb(101, 204, 204), rgb(21, 172, 204) 100%);
+    border-right: 1px solid #0094d0;
+}
+
+#nav .navbar-nav li:nth-child(2), #nav .navbar-nav li:nth-child(4) {
+    background: -webkit-linear-gradient(top , rgb(115, 178, 204), rgb(89, 166, 204) 100%);
+    border-right: 1px solid #0094d0;
+}
+
+#nav .navbar-nav li a:hover,.create_album:hover,.create_album:active,.create_album:focus
+,.upload_photo:hover,.upload_photo:active,.upload_photo:focus
+{
+    background: -webkit-linear-gradient(top , rgb(23, 238, 235), rgb(35, 189, 232) 100%);
+}

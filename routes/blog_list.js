@@ -31,7 +31,7 @@ exports.show = function(req, res){
                             //否则显示该分类的日志
                             else {
                                 Tag.findOne({tag_user:user._id,tag_number:blogtag },function(err, nowtag){
-                                    Tag.find({tag_user:user._id},'tag_amount -_id',null,{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, tag_amo) {
+                                    Tag.find({tag_user:user._id},'tag_amount -_id',{skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}, function(err, tag_amo) {
                                         Blog.find({blog_user:user._id, blog_tag:nowtag._id}, function(err, part){
                                             res.render('blog_list',{
                                                 tags: tag,
@@ -89,7 +89,7 @@ exports.create = function(req,res){
         if(tag) {
             //将原始的标签编号存放到tagnumber
             for(var i in tag) {
-                tagnumber.push(tag[i].tag_number)
+                tagnumber.push(parseInt(tag[i].tag_number))
             }
             tagnumber.sort(sortNumber)
             //如果排序后第一个元素不是0，把前面的编号存放到empty

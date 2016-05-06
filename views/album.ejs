@@ -5,6 +5,7 @@
     <title><%= bloggername %>相册</title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/blue_style.css">
 </head>
 <body id="album">
     <% include menu %>
@@ -15,7 +16,7 @@
                 <% include message %>
                 <% if (locals.user && locals.user.user_account == blogname) { %>
                 <div class="album_operation">
-                    <a href=""  class="create_album" data-toggle="modal" data-target="#album_modal"></a>
+                    <a href=""  class="create_album" data-toggle="modal" data-target="#album_modal">创建相册</a>
                 </div>
                 <% }%>
                 <div class="alubm_list">

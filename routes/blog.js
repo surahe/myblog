@@ -9,6 +9,7 @@ exports.show = function(req, res) {
         Blog.findById(req.params.blogid, function(err, blog){
             Tag.findById(blog.blog_tag, function(err, tag){
                 Message.find({message_blog:blog._id}, null, {skip: page.from, limit: page.to-page.from+1,sort:{_id:-1}}).populate('message_user').exec(function(err, msg){
+                    console.log(blog)
                     res.render('blog',{
                         blogname: req.params.blogname,
                         bloggername: user.user_username,
