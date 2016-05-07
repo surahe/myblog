@@ -5,26 +5,26 @@
 ,#pager a:hover,#pager a:focus,#pager a :active,.footer,.modal-header,.save button,.post_blog_box button
 ,.modal-footer .btn-primary
 {
-    background: #e9869a;
+    background: #000000;
 }
 
 /*浅色背景色*/
 .nav > li > a:hover, .nav > li > a:focus,.write_link:hover
 ,.modal-body button,.content-album-picture-total
 {
-    background: rgba(255, 172, 176, 0.91);
+    background: rgba(89, 89, 89, 0.91);
 }
 
 .save button:hover,.save button:active,.save button:focus
 ,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active
 ,.modal-footer .btn-primary:hover,.modal-footer .btn-primary:focus,.modal-footer .btn-primary:active
 {
-    background: #ca6c72;
+    background: #adab99;
 }
 
 #logo #preview,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,body
 {
-    background: rgba(219, 32, 31, 0.18);
+    background: rgb(212, 209, 194);
 }
 
 /*字体*/
@@ -34,14 +34,14 @@
 ,.blog_cell a,.tag_list li a,.modal-body,.content-album-name,#album form label,.desc
 ,#pager a
 {
-    color: #e26a7c
+    color: #242424
 }
 
 /*深色字体*/
 .choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active
 ,.modal-body a,.tag_list ul em,.content-album-date,.photo_list li a,#ablut .basic_title
 {
-    color: #9c0a0e
+    color: #000000
 }
 
 /*边框色*/
@@ -52,9 +52,10 @@
 ,.tag_list,.tag_list h4,.blog_list,.modal-header,.modal-footer,.modal-body input,.modal-body button
 ,.article,.alubm_list .content-album,.create_album,.create_album,.photobody,.photo_border p,.text,#commentArea
 ,#pager a,.save button,.post_blog_box button,.save button:hover,.save button:active,.save button:focus
-,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active,#nav .navbar-nav,.nav-tabs > li > a:hover,.nav > li > a:hover, .nav > li > a:focus
+,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active,#nav .navbar-nav
+,.nav > li > a:hover, .nav > li > a:focus
 {
-    border-color: #f4b3c2
+    border-color: #393939
 }
 
 /*下边框透明*/
@@ -72,17 +73,17 @@
 }
 
 #nav .navbar-nav li:nth-child(1), #nav .navbar-nav li:nth-child(3),.my_func a {
-    background: -webkit-linear-gradient(top , rgb(233, 134, 154), rgb(255, 172, 176) 100%);
-    border-right: 1px solid #ffacb0;
+    background: -webkit-linear-gradient(top , rgb(73, 73, 73), rgb(173, 171, 171) 100%);
+    border-right: 1px solid #494949;
 }
 
 #nav .navbar-nav li:nth-child(2), #nav .navbar-nav li:nth-child(4) {
-    background: -webkit-linear-gradient(top , rgb(248, 79, 117), rgb(255, 38, 80) 100%);
-    border-right: 1px solid #f89191;
+    background: -webkit-linear-gradient(top , rgb(93, 93, 93), rgb(0, 0, 0) 100%);
+    border-right: 1px solid #000000;
 }
 
 #nav .navbar-nav li a:hover,.create_album:hover,.create_album:active,.create_album:focus
 ,.upload_photo:hover,.upload_photo:active,.upload_photo:focus
 {
-    background: -webkit-linear-gradient(top , rgb(255, 183, 180), rgb(255, 148, 151) 100%);
+    background: -webkit-linear-gradient(top , rgb(215, 215, 215), rgb(173, 171, 153) 100%);
 }

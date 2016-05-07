@@ -1,11 +1,59 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>聚友博客</title>
+        <link rel="stylesheet" href="/stylesheets/bootstrap.css" title="default">
+        <link rel="stylesheet" href="/stylesheets/style.css" title="default">
+    </head>
+    <body id="index">
+        <% include menu %>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="new_user">
+                        <h4>新用户</h4>
+                        <ul class="clearfix">
+                            <% if(new_user) {%>
+                                <% for(var i= new_user.length-1; i >= 0; i--) {%>
+                                    <li id="<%= new_user[i]._id%>">
+                                        <a href="http://localhost:3000/u/<%= new_user[i].user_account %>">
+                                            <% if (new_user[i].user_logo) { %>
+                                                <img src="<%= new_user[i].user_logo %>">
+                                            <% }else {%>
+                                                <img src="/images/logo/default.jpg">
+                                            <% }%>
+                                        </a>
+                                        <p><a href="http://localhost:3000/u/<%= new_user[i].user_account %>"><%= new_user[i].user_username%></a></p>
+                                    </li>
+                                <% }%>
+                            <% }%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <a target="_blank" href="http://localhost:3000/"><img src="/images/system/logo.jpg" alt="Sura博客"></a>
+                </div>
+                <div class="col-md-4">
+                    <div class="new_article">
+                        <h4 class="new_article_title">新日志</h4>
+                        <div class="new_article_box clearfix">
+                            <% if(new_blog) {%>
+                            <% for(var i=0; i < new_blog.length; i++) {%>
+                                <div>
+                                    <h4><a href="http://localhost:3000/<%= new_blog[i].blog_user.user_account%>/blog/<%= new_blog[i]._id%>"><%= new_blog[i].blog_title %></a></h4>
+                                    <p><%= new_blog[i].blog_summary %></p>
+                                </div>
+                            <% } %>
+                            <% }%>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <% include footer%>
+        <script src="/javascripts/jquery-1.11.1.js"></script>
+        <script src="/javascripts/bootstrap.js"></script>
+    </body>
 </html>

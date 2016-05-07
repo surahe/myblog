@@ -53,7 +53,7 @@
 ,.tag_list,.tag_list h4,.blog_list,.modal-header,.modal-footer,.modal-body input,.modal-body button
 ,.article,.alubm_list .content-album,.create_album,.create_album,.photobody,.photo_border p,.text,#commentArea
 ,#pager a,.save button,.post_blog_box button,.save button:hover,.save button:active,.save button:focus
-,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active
+,.post_blog_box button:hover,.post_blog_box button:focus,.post_blog_box button:active,#nav .navbar-nav,.nav-tabs > li > a:hover
 {
     border-color: #c60009
 }

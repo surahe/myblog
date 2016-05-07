@@ -16,6 +16,7 @@
         10.首页
         11.配色风格
         12.补充
+        13.博客首页
     -------------------
 
     COLOURS -----------
@@ -281,6 +282,11 @@
 
 #logo .save_pic button {
     width: 80px;
+}
+
+#captcha-photo {
+    cursor: pointer;
+    margin-left: 20px;
 }
 
 /* 4 相册
@@ -1231,3 +1237,61 @@
     background: #f0f0f0;
 }
 
+/* 13博客首页
+---------------------------------------------------------------------- */
+#index {
+    background-color: #eeeeee;
+}
+
+.new_user,.new_article {
+    border: 1px solid #898989;
+}
+
+.new_user h4,.new_article .new_article_title{
+    margin-top: 0;
+    height: 30px;
+    line-height: 30px;
+    background-color: #898989;
+    color: #fff;
+    text-align: center;
+}
+
+.new_user li{
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+}
+
+.new_user li img{
+    width: 80px;
+    height: 80px;
+}
+
+.new_user p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.new_article_box {
+    padding:0 20px;
+}
+
+.new_article_box h4 {
+    padding-top: 3px;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.new_article_box div{
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #a0a0a0;
+}
+
+.new_article_box div p{
+    overflow: hidden; height: 60px;
+}
+
+#index .footer {
+    margin-top: 0;
+    padding: 22px 0;
+}

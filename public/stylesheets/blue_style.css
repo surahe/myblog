@@ -42,7 +42,7 @@
 , #preview-pane div,.choose_pic button,.choose_pic button:hover,.choose_pic button:focus,.choose_pic button:active,.my_func a
 ,.tag_list,.tag_list h4,.blog_list,.modal-header,.modal-footer,.modal-body input,.modal-body button
 ,.article,.alubm_list .content-album,.create_album,.create_album,.photobody,.photo_border p,.text,#commentArea
-,#pager a
+,#pager a,#nav .navbar-nav
 {
     border-color:#04b1cc
 }

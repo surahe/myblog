@@ -33,6 +33,7 @@ var home = require('./routes/home')
 var blog_list_page = require('./lib/middleware/blog_list_page');
 var message_page = require('./lib/middleware/message_page');
 var style = require('./routes/style')
+var index = require('./routes/index')
 
 var app = express();
 
@@ -108,5 +109,7 @@ app.get('/u/:blogname',blog_list_page, home.show)
 
 app.get('/set/style', style.form)
 app.post('/setstyle', style.submit)
+
+app.get('/',index.show)
 
 module.exports = app;
