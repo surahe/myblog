@@ -16,23 +16,26 @@ exports.show = function(req,res) {
         }
         var picture_name_box = [],
             picture_type_box = [],
-            picture_id_box = [];
+            picture_id_box = [],
+            picture_time_box = [];
         for(var i = (page.number - 1) * 8, j = 0;i<  page.number * 8 ; i++,j++) {
             if(this_album.album_picture[i]) {
                 picture_name_box[j] = this_album.album_picture[i].photo_name;
                 picture_type_box[j] = this_album.album_picture[i].photo_type;
                 picture_id_box[j] = this_album.album_picture[i]._id;
+                picture_time_box[j] = this_album.album_picture[i].photo_time;
             }
         }
         fs.readdir('public/images/album/' + user._id + "/" + req.params.albumname, function(err, data){
             res.render('photo', {
                 files: data,
                 blogname: req.params.blogname,
-                albumname:req.params.albumname,
+                albumname: req.params.albumname,
                 userid: user._id,
                 picturename: picture_name_box,
                 picturetype: picture_type_box,
                 pictureid: picture_id_box,
+                picturetime: picture_time_box,
                 page_index: page.number,
                 bloggername: user.user_username,
                 style: user.user_style

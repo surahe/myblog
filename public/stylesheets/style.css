@@ -1295,3 +1295,19 @@
     margin-top: 0;
     padding: 22px 0;
 }
+
+#tanchu_img {
+    position: absolute;
+    z-index: 999;
+    display: none;
+}
+
+#bg {
+    display: none;
+    z-index: 888;
+    width:100%;
+    height: 100%;
+    position: fixed;
+    background-color:#000000;
+    opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=50);
+}
